@@ -1,10 +1,17 @@
 <?php
 
-file_put_contents('log.txt', date('H:i:s')."\n", FILE_APPEND);
+require_once 'Telegram.php';
 
-//$token = '156771533:AAFtGPT_o3MFuPRBnuYwOZGfNHWt_FivTy4';
-//$site = 'https://api.telegram.org/bot'.$token;
-//
-//$update = file_get_contents($site."/getupdates");
-//
-//print_r($update);
+
+$content = file_get_contents("php://input");
+$update = json_decode($content, true);
+
+if (!$update) {
+    // receive wrong update, must not happen
+    exit;
+}
+
+if (isset($update["message"])) {
+    $telegram = new Telegram('156771533:AAFtGPT_o3MFuPRBnuYwOZGfNHWt_FivTy4', 'https://wp.12qw.ru/telegram/index.php');
+    $telegram->processMessage($update["message"]);
+}
