@@ -10,7 +10,6 @@ $curl = curl_init();
 curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($curl, CURLOPT_URL, $site."/getupdates");
 $result = curl_exec($curl);
-curl_close($curl);
 
 $update = file_get_contents($site."/getupdates");
 
