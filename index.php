@@ -4,6 +4,6 @@ $site = 'https://api.telegram.org/bot'.$token;
 
 $update = file_get_contents($site."/getme");
 
-print_r($update);
+var_dump($update);
 
 ?>
