@@ -1,9 +1,9 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: admin
- * Date: 11.01.2016
- * Time: 14:07
- */
+$token = '156771533:AAFtGPT_o3MFuPRBnuYwOZGfNHWt_FivTy4';
+$site = 'https://api.telegram.org/bot'.$token;
 
-echo 'test';
+$update = file_get_contents($site."/getupdates");
+
+print_r($update);
+
+?>
