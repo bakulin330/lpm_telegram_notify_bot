@@ -41,7 +41,7 @@ class Telegram {
 
     protected function logError($mes)
     {
-        file_put_contents(DIR_TMP.'telegram.errors.log', "----\n".Rocket::App()->date->getCurDate(5*3600)."\n".$mes."\n".traceToJson(debug_backtrace()), FILE_APPEND);
+        file_put_contents(DIR_TMP.'telegram.errors.log', "----\n".date('Y-m-d H:i:s')."\n".$mes."\n", FILE_APPEND);
     }
 
     public function apiRequestWebhook($method, $parameters) {
