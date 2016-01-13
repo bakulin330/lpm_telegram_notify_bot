@@ -1,6 +1,8 @@
 <?php
 
-require_once 'Telegram.php';
+require_once 'config.php';
+require_once DIR_CLASSES.'SendMessage.php';
+require_once DIR_CLASSES.'VerifyUser.php';
 
 
 $content = file_get_contents("php://input");
@@ -12,8 +14,17 @@ if (!$update) {
 }
 
 if (isset($update["message"])) {
-    $message = print_r($update,true);
-    file_put_contents('log.txt', $message);
+    //$message = print_r($update,true);
+   // file_put_contents('log.txt', $message);
+    //$telegram = new Telegram('156771533:AAFtGPT_o3MFuPRBnuYwOZGfNHWt_FivTy4', 'https://wp.12qw.ru/telegram/index.php');
+   // $telegram->processMessage($update["message"]);
     $telegram = new Telegram('156771533:AAFtGPT_o3MFuPRBnuYwOZGfNHWt_FivTy4', 'https://wp.12qw.ru/telegram/index.php');
-    $telegram->processMessage($update["message"]);
+    $verify = new VerifyUser();
+    if($verify->checkCode($update["text"] == true)){
+        $telegram->sendMessage('OK', $update["chat"]["id"]);
+    }else{
+        $telegram->sendMessage('FALSE', $update["chat"]["id"]);
+    }
+
+
 }
