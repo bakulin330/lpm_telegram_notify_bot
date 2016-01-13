@@ -1,7 +1,7 @@
 <?php
 require_once '..'.DIRECTORY_SEPARATOR.'config.php';
-require_once DIR_CLASSES.'SendMessage.php';
-require_once DIR_CLASSES.'VerifyUser.php';
+require_once 'SendMessage.php';
+require_once 'VerifyUser.php';
 
 /**
  * Created by PhpStorm.
