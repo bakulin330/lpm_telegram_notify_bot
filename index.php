@@ -11,13 +11,13 @@ if (!$update) {
     // receive wrong update, must not happen
     exit;
 }
-
+file_put_contents('log.txt', $message);
 $bot = new Bot();
 $bot->process($update);
 
 //if (isset($update["message"])) {
     //$message = print_r($update,true);
-   // file_put_contents('log.txt', $message);
+
     //$telegram = new Telegram('156771533:AAFtGPT_o3MFuPRBnuYwOZGfNHWt_FivTy4', 'https://wp.12qw.ru/telegram/index.php');
    // $telegram->processMessage($update["message"]);
 
