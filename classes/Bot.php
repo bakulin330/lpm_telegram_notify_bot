@@ -1,7 +1,7 @@
 <?php
 
 require_once 'SendMessage.php';
-require_once 'VerifyUser.php';
+//require_once 'VerifyUser.php';
 
 /**
  * Created by PhpStorm.
