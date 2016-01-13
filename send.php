@@ -15,7 +15,7 @@ if(isset($_POST["send"]) && $_POST["text"] !== ""){
     $user_message = $_POST["text"];
     $message = "Вам пришёл заказ от пользователя с ID: *".$user_id."*.\nСообщение: _".$user_message."_";
 
-    $sender->sendMessage($user_id, $message);
+    //$sender->sendMessage($user_id, $message);
 
     $gen = new Gen();
     $data = $gen->getUserCode($user_id);
