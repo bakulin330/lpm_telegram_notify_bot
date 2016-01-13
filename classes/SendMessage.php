@@ -183,7 +183,7 @@ class Telegram {
         }
     }
 
-    public function sendMessage ($message, $user_id) {
-        return $this->apiRequestJson("sendMessage", array('chat_id' => $user_id, 'text' => $message, 'parse_mode' => "Markdown"));
+    public function sendMessage ($message, $chat_id) {
+        return $this->apiRequestJson("sendMessage", array('chat_id' => $chat_id, 'text' => $message, 'parse_mode' => "Markdown"));
     }
 } 
