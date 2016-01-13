@@ -1,5 +1,5 @@
 <?php
-require_once '..'.DIRECTORY_SEPARATOR.'config.php';
+
 require_once 'SendMessage.php';
 require_once 'VerifyUser.php';
 
