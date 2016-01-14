@@ -19,7 +19,7 @@ $update = json_decode($content, true);
 //}
 
 //$send = new src\Telegram(API_KEY, WEBHOOK_URL);
-$ver = new src\VerifyUser();
+$bot = new src\Bot();
 
 if (isset($update["message"])){
     //$send->sendMessage(158922852, 'i can send message');
