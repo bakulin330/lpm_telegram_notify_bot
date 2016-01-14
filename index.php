@@ -153,3 +153,28 @@ function logError($mes)
     file_put_contents(DIR_TMP.'telegram.errors.log', "----\n".date('Y-m-d H:i:s')."\n".$mes."\n", FILE_APPEND);
 }
 
+
+function apiRequestJson($method, $parameters) {
+    if (!is_string($method)) {
+        error_log("Method name must be a string\n");
+        return false;
+    }
+
+    if (!$parameters) {
+        $parameters = array();
+    } else if (!is_array($parameters)) {
+        error_log("Parameters must be an array\n");
+        return false;
+    }
+
+    $parameters["method"] = $method;
+
+    $handle = curl_init(API_URL);
+    curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($handle, CURLOPT_CONNECTTIMEOUT, 5);
+    curl_setopt($handle, CURLOPT_TIMEOUT, 60);
+    curl_setopt($handle, CURLOPT_POSTFIELDS, json_encode($parameters));
+    curl_setopt($handle, CURLOPT_HTTPHEADER, array("Content-Type: application/json"));
+
+    return exec_curl_request($handle);
+}
