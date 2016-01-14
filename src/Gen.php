@@ -1,5 +1,7 @@
 <?php
-require_once __DIR__.'/../config.php';
+
+namespace src;
+
 //echo __DIR__;
 /**
  * класс для генерации кода активации
@@ -22,7 +24,7 @@ class Gen
     public function generateCodeForUser($user_id)
     {
         if (null !== $this->getUserCode($user_id)) {
-            throw new Exception('user already has code', 1873);
+            throw new \Exception('user already has code', 1873);
         }
 
         $data = $this->readDataFile();
@@ -53,6 +55,6 @@ class Gen
             $cnt++;
         }
 
-        throw new Exception('cant\'t generate code', 1874);
+        throw new \Exception('cant\'t generate code', 1874);
     }
 }

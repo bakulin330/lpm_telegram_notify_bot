@@ -1,7 +1,6 @@
 <?php
 
-require_once 'SendMessage.php';
-//require_once 'VerifyUser.php';
+namespace src;
 
 /**
  * Created by PhpStorm.
@@ -11,12 +10,19 @@ require_once 'SendMessage.php';
  */
 class Bot
 {
+    /**
+     * @var VerifyUser
+     */
     protected $verify;
-    protected $send;
 
-    public function __construct(){
-        $this->verify = new VerifyUser();
-        $this->send = new Telegram('156771533:AAFtGPT_o3MFuPRBnuYwOZGfNHWt_FivTy4', 'https://wp.12qw.ru/telegram/index.php');
+    /**
+     * @var Telegram
+     */
+    protected $telegram;
+
+    public function __construct($verifier, $telegram){
+        $this->verify = $verifier;
+        $this->telegram = $telegram;
     }
 
     public function process($data)
@@ -47,9 +53,9 @@ class Bot
     {
         $code = $this->verify->checkCode($code);
         if ($code) {
-            $this->send->sendMessage('OK',$chat_id);
+            $this->telegram->sendMessage('OK',$chat_id);
         } else {
-            $this->send->sendMessage('FALSE',$chat_id);
+            $this->telegram->sendMessage('FALSE',$chat_id);
         }
     }
 }

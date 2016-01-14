@@ -7,9 +7,8 @@
  */
 
 require_once 'config.php';
-require DIR_CLASSES.'Gen.php';
 
-$gen = new Gen();
+$gen = new \src\Gen();
 $code = $gen->getUserCode($user_id);
 
 if (null!==$code){

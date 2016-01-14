@@ -1,4 +1,7 @@
 <?php
+
+namespace src;
+
 require_once __DIR__.DIRECTORY_SEPARATOR.'Gen.php';
 
 /**

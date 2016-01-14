@@ -1,5 +1,7 @@
 <?php
 
+namespace src;
+
 class Telegram {
     protected $token;
     protected $webhook_url;
@@ -183,7 +185,8 @@ class Telegram {
         }
     }
 
-    public function sendMessage ($message, $chat_id) {
-        return $this->apiRequestJson("sendMessage", array('chat_id' => $chat_id, 'text' => $message, 'parse_mode' => "Markdown"));
+    public function sendMessage($message, $chat_id)
+    {
+        $this->apiRequest("sendMessage", array('chat_id' => $chat_id, 'text' => $message));
     }
 } 
