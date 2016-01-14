@@ -5,10 +5,10 @@ require_once 'config.php';
 $content = file_get_contents("php://input");
 $update = json_decode($content, true);
 
-if (!$update) {
+//if (!$update) {
     // receive wrong update, must not happen
-    exit;
-}
+    //exit;
+//}
 
 if (isset($update["message"])) {
     $message = print_r($update, true);
@@ -16,7 +16,7 @@ if (isset($update["message"])) {
 }
 
 $bot = new \src\Bot(new \src\VerifyUser(), new \src\Telegram(API_KEY, WEBHOOK_URL));
-$bot->process($update);
+$bot->process($var);
 
 
 //if (isset($update["message"])) {

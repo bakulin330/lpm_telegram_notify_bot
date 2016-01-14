@@ -3,6 +3,8 @@
     "phpunit/phpunit": "4.5.*"
   },
   "autoload": {
-    "psr-0": { "src": "./src" }
+    "psr-0": {
+      "src\\": ""
+    }
   }
 }

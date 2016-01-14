@@ -30,20 +30,20 @@ class Bot
         if (isset($data['message']) && isset($data['message']['text'])){
             switch ($data['message']['text']){
                 case '/start':
-                    //âûîäèì ñîîáùåíèå, ÷òî  íóæíî íàïèñàòü êëş÷
+                    //Ğ²Ñ‹Ğ¾Ğ´Ğ¸Ğ¼ ÑĞ¾Ğ¾Ğ±Ñ‰ĞµĞ½Ğ¸Ğµ, Ñ‡Ñ‚Ğ¾  Ğ½ÑƒĞ¶Ğ½Ğ¾ Ğ½Ğ°Ğ¿Ğ¸ÑĞ°Ñ‚ÑŒ ĞºĞ»ÑÑ‡
 
                     break;
 
                 case '/stop':
-                    //óäàëÿåì ïî chat_id ïğèâÿçêó ê ïîëüçîâàòåëş
+                    //ÑƒĞ´Ğ°Ğ»ÑĞµĞ¼ Ğ¿Ğ¾ chat_id Ğ¿Ñ€Ğ¸Ğ²ÑĞ·ĞºÑƒ Ğº Ğ¿Ğ¾Ğ»ÑŒĞ·Ğ¾Ğ²Ğ°Ñ‚ĞµĞ»Ñ
                     break;
 
                 default:
                     if (preg_match('#^\d+$#', $data['message']['text'])){
-                        //÷èñëî
+                        //Ñ‡Ğ¸ÑĞ»Ğ¾
                         $this->connectUserByCode($data['message']['text'], $data['message']['chat']['id']);
                     } else {
-                        //nothing
+                        $this->telegram->sendMessage('not int',$data['message']['chat']['id']);
                     }
             }
         }
