@@ -1,5 +1,5 @@
 <?php
-require_once '..'.DIRECTORY_SEPARATOR.'config.php';
+require_once 'config.php';
 /**
  * класс для генерации кода активации
  */
