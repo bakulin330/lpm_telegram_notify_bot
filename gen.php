@@ -8,7 +8,7 @@
 
 require_once 'config.php';
 
-$gen = new Gen();
+$gen = new \src\Gen();
 $code = $gen->getUserCode($user_id);
 
 if (null!==$code){

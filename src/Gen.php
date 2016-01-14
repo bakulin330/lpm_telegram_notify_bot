@@ -1,13 +1,17 @@
 <?php
 namespace src;
 
-//echo __DIR__;
 /**
  * класс для генерации кода активации
  */
 class Gen
 {
-    const DATA_FILE = '/../tmp/telegram_notify_code.php';
+    private $data_file;
+
+    function __construct()
+    {
+        $this->data_file =  DIR_TMP.'telegram_notify_code.php';
+    }
 
     public function getUserCode($user_id)
     {
@@ -33,12 +37,12 @@ class Gen
 
     public function readDataFile()
     {
-        return file_exists(self::DATA_FILE) ? include self::DATA_FILE : [];
+        return file_exists($this->data_file) ? include $this->data_file : [];
     }
 
     public function writeDataFile($data)
     {
-        return file_put_contents(self::DATA_FILE, "<?php return " . var_export($data, true) . ";", EXTR_OVERWRITE);
+        return file_put_contents($this->data_file, "<?php return " . var_export($data, true) . ";", EXTR_OVERWRITE);
     }
 
     public function getRandomNumber()
