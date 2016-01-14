@@ -3,10 +3,10 @@
 $content = file_get_contents("php://input");
 $update = json_decode($content, true);
 
-if (!$update) {
+//if (!$update) {
      //receive wrong update, must not happen
-    exit;
-}
+//    exit;
+//}
 
 require_once 'config.php';
 

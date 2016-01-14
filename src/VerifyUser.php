@@ -15,13 +15,10 @@ class VerifyUser
     public function checkCode($code){
         $gen = new Gen();
         $data = $gen->readDataFile();
-        foreach ($data as $key){
+        foreach ($data as $key => $user_id){
             if ($key == $code ){
                 return true;
             }else return false;
         }
     }
 }
-
-$ver = new VerifyUser();
-$ver->checkCode(1231);
