@@ -1,6 +1,5 @@
 <?php
 namespace src;
-require_once '/../config.php';
 
 //echo __DIR__;
 /**
