@@ -22,9 +22,10 @@ $update = json_decode($content, true);
 
 if (isset($update["message"])){
     //$send->sendMessage(158922852, 'i can send message');
-    sendMessage(158922852, 'i can send message');
+
     $message = print_r($update, true);
     file_put_contents('log.txt', $message);
+    sendMessage(158922852, 'i can send message');
 }
 
 
