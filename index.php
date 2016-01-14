@@ -5,10 +5,10 @@ require_once 'config.php';
 $content = file_get_contents("php://input");
 $update = json_decode($content, true);
 
-//if (!$update) {
-//     //receive wrong update, must not happen
-//   exit;
-//}
+if (!$update) {
+     //receive wrong update, must not happen
+    exit;
+}
 
 
 //if (isset($update["message"])) {
@@ -17,15 +17,12 @@ $update = json_decode($content, true);
 //}
 
 
-//$bot = new \src\Bot(new \src\VerifyUser(), new \src\Telegram(API_KEY, WEBHOOK_URL));
-//$bot->process($var);
+
 if (isset($update["message"])){
     $message = print_r($update, true);
     file_put_contents('log.txt', $message);
-    $bot = new src\Telegram(API_KEY, WEBHOOK_URL);
-    $bot->processMessage($update["message"]);
-
-
+    $bot = new \src\Bot(new \src\VerifyUser(), new \src\Telegram(API_KEY, WEBHOOK_URL));
+    $bot->process($var);
 }
 
 //$bot = new \src\Bot(new \src\VerifyUser(), new \src\Telegram(API_KEY, WEBHOOK_URL));
