@@ -1,5 +1,6 @@
 <?php
-require_once '..'.DIRECTORY_SEPARATOR.'config.php';
+require_once __DIR__.'/../config.php';
+//echo __DIR__;
 /**
  * класс для генерации кода активации
  */
