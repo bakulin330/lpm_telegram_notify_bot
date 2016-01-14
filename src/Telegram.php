@@ -68,8 +68,11 @@ class Telegram {
     }
 
     public function execCurlRequest($handle) {
-        curl_setopt($handle, CURLOPT_SSL_VERIFYHOST, 0);
-        curl_setopt($handle, CURLOPT_SSL_VERIFYPEER, 0);
+        curl_setopt($handle, CURLOPT_SSL_VERIFYHOST, false);
+        curl_setopt($handle, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($handle, CURLOPT_CONNECTTIMEOUT, 5);
+        curl_setopt($handle, CURLOPT_TIMEOUT, 20);
 
         if ($this->debug){
             curl_setopt($handle, CURLOPT_VERBOSE, true);
@@ -138,9 +141,6 @@ class Telegram {
         $url = $this->api_url.$method.'?'.http_build_query($parameters);
 
         $handle = curl_init($url);
-        curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($handle, CURLOPT_CONNECTTIMEOUT, 5);
-        curl_setopt($handle, CURLOPT_TIMEOUT, 60);
 
         return $this->execCurlRequest($handle);
     }
