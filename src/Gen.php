@@ -1,6 +1,8 @@
 <?php
 namespace src;
 require_once DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'config.php';
+ini_set("display_errors",1);
+error_reporting(E_ALL);
 echo DIR_TMP;
 //echo __DIR__;
 /**
