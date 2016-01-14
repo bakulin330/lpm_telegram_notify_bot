@@ -22,3 +22,6 @@ class VerifyUser
         }
     }
 }
+
+$ver = new VerifyUser();
+$ver->checkCode(1231);

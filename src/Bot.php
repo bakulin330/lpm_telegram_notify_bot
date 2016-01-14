@@ -46,8 +46,6 @@ class Bot
                         $this->telegram->sendMessage('not int',$data['message']['chat']['id']);
                     }
             }
-        } else {
-            $this->telegram->sendMessage('not isset',$data['message']['chat']['id']);
         }
     }
 

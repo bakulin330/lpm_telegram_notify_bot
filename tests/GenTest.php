@@ -17,7 +17,6 @@ class GenTest extends PHPUnit_Framework_TestCase
     {
         parent::__construct($name, $data, $dataName);
 
-        require_once dirname(__FILE__).DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'config.php';
         $this->gen = new \src\Gen();
     }
 
