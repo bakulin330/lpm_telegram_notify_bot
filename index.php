@@ -10,7 +10,7 @@ $update = json_decode($content, true);
 //   exit;
 //}
 
-
+$bot = new src\Telegram();
 
 
 //if (isset($update["message"])) {
