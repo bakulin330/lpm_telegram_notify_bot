@@ -1,6 +1,7 @@
 <?php
 namespace src;
-require_once $_SERVER["DOCUMENT_ROOT"].'config.php';
+require_once DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'config.php';
+echo DIR_TMP;
 //echo __DIR__;
 /**
  * класс для генерации кода активации
