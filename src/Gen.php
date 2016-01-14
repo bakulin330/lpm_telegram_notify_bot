@@ -1,7 +1,6 @@
 <?php
-
 namespace src;
-
+require_once '/../config.php';
 //echo __DIR__;
 /**
  * класс для генерации кода активации
