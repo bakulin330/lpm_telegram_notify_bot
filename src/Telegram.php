@@ -185,13 +185,9 @@ class Telegram {
         }
     }
 
-    public function sendMessage($message, $chat_id)
+    public function sendMessage($chat_id, $message)
     {
         $this->apiRequest("sendMessage", array('chat_id' => $chat_id, 'text' => $message));
     }
 
-    public function sendMessageWH($message, $chat_id)
-    {
-        $this->apiRequestWebhook("sendMessage", array('chat_id' => $chat_id, 'text' => $message));
-    }
 } 
