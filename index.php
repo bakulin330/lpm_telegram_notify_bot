@@ -18,7 +18,7 @@ $update = json_decode($content, true);
 //    file_put_contents('log.txt', $message);
 //}
 
-$send = new src\Telegram(API_KEY, WEBHOOK_URL);
+//$send = new src\Telegram(API_KEY, WEBHOOK_URL);
 
 if (isset($update["message"])){
     //$send->sendMessage(158922852, 'i can send message');
