@@ -1,11 +1,11 @@
 <?php
 require_once 'config.php';
-require_once DIR_CLASSES.'Bot.php';
-
-
+//require_once DIR_CLASSES.'Bot.php';
 
 $content = file_get_contents("php://input");
 $update = json_decode($content, true);
+
+
 
 
 if (!$update) {
@@ -18,8 +18,9 @@ if (isset($update["message"])) {
     file_put_contents('log.txt', $message);
 }
 
-$bot = new Bot();
-$bot->process($update);
+//$bot = new Bot();
+//$bot->process($update);
+
 
 //if (isset($update["message"])) {
     //$message = print_r($update,true);
