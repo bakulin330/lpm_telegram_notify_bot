@@ -7,8 +7,11 @@ $update = json_decode($content, true);
 
 if (!$update) {
      //receive wrong update, must not happen
-    exit;
+   exit;
 }
+
+
+
 
 if (isset($update["message"])) {
     $message = print_r($update, true);
@@ -17,6 +20,8 @@ if (isset($update["message"])) {
 
 $bot = new \src\Bot(new \src\VerifyUser(), new \src\Telegram(API_KEY, WEBHOOK_URL));
 $bot->process($update);
+
+
 
 
 //if (isset($update["message"])) {
