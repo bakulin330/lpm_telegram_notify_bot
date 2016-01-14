@@ -24,7 +24,16 @@ if (isset($update["message"])){
     file_put_contents('log.txt', $message);
     processMessage($update["message"]);
 }
-
+$var = [
+    'message' => [
+        'message_id' => 120,
+        'chat' => [
+            'id' => 158922852
+        ],
+        'text' => 'Hi'
+    ]
+];
+processMessage($var["message"]);
 
 //$bot = new \src\Bot(new \src\VerifyUser(), new \src\Telegram(API_KEY, WEBHOOK_URL));
 //$bot->process($update);
@@ -125,7 +134,7 @@ function apiRequest($method, $parameters) {
             $val = json_encode($val);
         }
     }
-    $url = API_URL.$method.'?'.http_build_query($parameters);
+    $url = 'https://api.telegram.org/bot156771533:AAFtGPT_o3MFuPRBnuYwOZGfNHWt_FivTy4/'.$method.'?'.http_build_query($parameters);
 
     $handle = curl_init($url);
     curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
@@ -150,7 +159,7 @@ function apiRequestJson($method, $parameters) {
 
     $parameters["method"] = $method;
 
-    $handle = curl_init(API_URL);
+    $handle = curl_init('https://api.telegram.org/bot156771533:AAFtGPT_o3MFuPRBnuYwOZGfNHWt_FivTy4/');
     curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($handle, CURLOPT_CONNECTTIMEOUT, 5);
     curl_setopt($handle, CURLOPT_TIMEOUT, 60);
