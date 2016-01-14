@@ -20,7 +20,7 @@ if (isset($update["message"])) {
 
 $bot = new \src\Bot(new \src\VerifyUser(), new \src\Telegram(API_KEY, WEBHOOK_URL));
 $send = new src\Telegram(API_KEY, WEBHOOK_URL);
-$send->sendMessage('i can send message', $update['message']['chat']['id']);
+$send->sendMessage('i can send message', 158922852);
 $bot->process($update);
 
 
