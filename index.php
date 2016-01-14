@@ -22,7 +22,7 @@ if (isset($update["message"])){
     $message = print_r($update, true);
     file_put_contents('log.txt', $message);
     $bot = new \src\Bot(new \src\VerifyUser(), new \src\Telegram(API_KEY, WEBHOOK_URL));
-    $bot->process($var);
+    $bot->process($update);
 }
 
 //$bot = new \src\Bot(new \src\VerifyUser(), new \src\Telegram(API_KEY, WEBHOOK_URL));
