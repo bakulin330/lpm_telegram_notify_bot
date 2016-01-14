@@ -5,6 +5,7 @@ require_once '/../config.php';
 /**
  * класс для генерации кода активации
  */
+echo DIR_TMP;
 class Gen
 {
     const DATA_FILE = DIR_TMP . 'telegram_notify_code.php';
