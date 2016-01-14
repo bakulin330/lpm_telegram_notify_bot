@@ -67,6 +67,9 @@ class Telegram {
     }
 
     public function execCurlRequest($handle) {
+        curl_setopt($handle, CURLOPT_SSL_VERIFYHOST, 0);
+        curl_setopt($handle, CURLOPT_SSL_VERIFYPEER, 0);
+
         $response = curl_exec($handle);
 
         if (false === $response) {
@@ -127,8 +130,6 @@ class Telegram {
         curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($handle, CURLOPT_CONNECTTIMEOUT, 5);
         curl_setopt($handle, CURLOPT_TIMEOUT, 60);
-        //curl_setopt($handle, CURLOPT_SSL_VERIFYHOST, 0);
-        //curl_setopt($handle, CURLOPT_SSL_VERIFYPEER, 0);
 
         return $this->execCurlRequest($handle);
     }
