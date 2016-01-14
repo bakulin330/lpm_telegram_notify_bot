@@ -1,5 +1,5 @@
 <?php
-require_once 'Gen.php';
+require_once __DIR__.DIRECTORY_SEPARATOR.'Gen.php';
 
 /**
  * Created by PhpStorm.
@@ -10,15 +10,12 @@ require_once 'Gen.php';
 class VerifyUser
 {
     public function checkCode($code){
-        $data = new Gen();
-        $data = $data->readDataFile();
-
+        $gen = new Gen();
+        $data = $gen->readDataFile();
         foreach ($data as $key){
-            if ($code === $key){
+            if ($key == $code ){
                 return true;
             }else return false;
         }
     }
-
-
 }
