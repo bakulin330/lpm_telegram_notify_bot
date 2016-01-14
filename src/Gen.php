@@ -8,7 +8,7 @@ echo DIR_TMP;
  */
 class Gen
 {
-    const DATA_FILE = DIR_TMP . 'telegram_notify_code.php';
+    const DATA_FILE = DIR_TMP.'telegram_notify_code.php';
 
     public function getUserCode($user_id)
     {
