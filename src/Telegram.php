@@ -185,7 +185,7 @@ class Telegram {
         }
     }
 
-    public function sendMessage($chat_id, $message)
+    public function sendMessage($message, $chat_id)
     {
         $this->apiRequest("sendMessage", array('chat_id' => $chat_id, 'text' => $message));
     }
