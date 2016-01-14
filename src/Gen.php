@@ -1,16 +1,13 @@
 <?php
 namespace src;
-require_once DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'config.php';
-ini_set("display_errors",1);
-error_reporting(E_ALL);
-echo DIR_TMP;
+
 //echo __DIR__;
 /**
  * класс для генерации кода активации
  */
 class Gen
 {
-    const DATA_FILE = DIR_TMP.'telegram_notify_code.php';
+    const DATA_FILE = DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'tmp/telegram_notify_code.php';
 
     public function getUserCode($user_id)
     {
