@@ -1,6 +1,6 @@
 <?php
 require_once 'config.php';
-//require_once DIR_CLASSES.'Bot.php';
+require_once DIR_CLASSES.'Bot.php';
 
 $content = file_get_contents("php://input");
 $update = json_decode($content, true);
