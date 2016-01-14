@@ -7,7 +7,7 @@ namespace src;
  */
 class Gen
 {
-    const DATA_FILE = DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'tmp/telegram_notify_code.php';
+    const DATA_FILE = '/../tmp/telegram_notify_code.php';
 
     public function getUserCode($user_id)
     {
