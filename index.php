@@ -20,10 +20,10 @@ $update = json_decode($content, true);
 
 
 if (isset($update["message"])){
-
+    $send = new src\Telegram(API_KEY, WEBHOOK_URL);
     $message = print_r($update, true);
     file_put_contents('log.txt', $message);
-    $send = new src\Telegram(API_KEY, WEBHOOK_URL);
+
     $send->processMessage($update["message"]);
 }
 
