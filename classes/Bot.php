@@ -1,6 +1,6 @@
 <?php
 
-//require_once 'SendMessage.php';
+require_once 'SendMessage.php';
 //require_once 'VerifyUser.php';
 
 /**
