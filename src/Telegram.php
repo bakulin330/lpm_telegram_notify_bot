@@ -6,6 +6,7 @@ class Telegram {
     protected $token;
     protected $webhook_url;
     protected $api_url;
+    protected $debug = true;
 
     public function __construct($token, $webhook_url = null)
     {
@@ -70,12 +71,22 @@ class Telegram {
         curl_setopt($handle, CURLOPT_SSL_VERIFYHOST, 0);
         curl_setopt($handle, CURLOPT_SSL_VERIFYPEER, 0);
 
+        if ($this->debug){
+            curl_setopt($handle, CURLOPT_VERBOSE, true);
+            $log = fopen(DIR_TMP.'curl.log', 'w+');
+            curl_setopt($handle, CURLOPT_STDERR, $log);
+        }
+
         $response = curl_exec($handle);
 
         if (false === $response) {
             $errno = curl_errno($handle);
             $error = curl_error($handle);
             $this->logError("Curl returned error $errno: $error\n");
+            if ($this->debug){
+                rewind($log);
+                $this->logError(stream_get_contents($log));
+            }
             curl_close($handle);
             return false;
         }
