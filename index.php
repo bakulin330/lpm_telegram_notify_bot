@@ -29,8 +29,8 @@ if (isset($update["message"])){
 }
 
 
-$bot = new \src\Bot(new \src\VerifyUser(), new \src\Telegram(API_KEY, WEBHOOK_URL));
-$bot->process($update);
+//$bot = new \src\Bot(new \src\VerifyUser(), new \src\Telegram(API_KEY, WEBHOOK_URL));
+//$bot->process($update);
 
 
 
