@@ -10,6 +10,7 @@ if (!$update) {
 
 require_once 'config.php';
 
+
 if (isset($update["message"])){
     $bot = new \src\Bot(new \src\VerifyUser(), new \src\Telegram(API_KEY, WEBHOOK_URL));
     $message = print_r($update, true);
