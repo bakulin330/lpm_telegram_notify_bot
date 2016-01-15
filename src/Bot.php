@@ -59,9 +59,9 @@ class Bot
             $data = $this->readDataFile();
             $data[$user_id] = $chat_id;
             $this->writeDataFile($data);
-            $this->telegram->sendMessage('OK',$chat_id);
+            $this->telegram->sendWebhookMessage('OK',$chat_id);
         } else {
-            $this->telegram->sendMessage('FALSE',$chat_id);
+            $this->telegram->sendWebhookMessage('FALSE',$chat_id);
         }
     }
 
