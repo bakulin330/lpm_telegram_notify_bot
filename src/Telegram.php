@@ -63,7 +63,7 @@ class Telegram {
         $parameters["method"] = $method;
 
         header("Content-Type: application/json");
-        echo json_encode($parameters);
+        //echo json_encode($parameters);
         return true;
     }
 
@@ -204,7 +204,7 @@ class Telegram {
 
     public function sendMessage($message, $chat_id)
     {
-        $this->apiRequest("sendMessage", array('chat_id' => $chat_id, 'text' => $message));
+        $this->apiRequestWebhook("sendMessage", array('chat_id' => $chat_id, 'text' => $message));
     }
 
 } 
