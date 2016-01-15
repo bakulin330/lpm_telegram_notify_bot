@@ -45,6 +45,7 @@ class Bot
                     break;
 
                 default:
+                    if($this->alreadyConnected($data)) return false;
                     if (preg_match('#^\d+$#', $data['message']['text'])){
                         //число
                         $this->connectUserByCode($data['message']['text'], $data['message']['chat']['id']);
@@ -68,21 +69,32 @@ class Bot
         }
     }
 
-    protected function writeDataFile($data)
+    public function writeDataFile($data)
     {
         return file_put_contents($this->data_file, "<?php return " . var_export($data, true) . ";", EXTR_OVERWRITE);
     }
 
-    protected function readDataFile()
+    public function readDataFile()
     {
         return file_exists($this->data_file) ? include $this->data_file : [];
     }
 
-    protected function deleteChatID($users_chat,$data){
+    public function deleteChatID($users_chat,$data){
         foreach ($users_chat as $user => $chat_id){
             if ($data['message']['chat']['id'] === $chat_id){
                 unset($users_chat[$user]);
                 $this->writeDataFile($users_chat);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public function alreadyConnected($data)
+    {
+        $users_chat = $this->readDataFile();
+        foreach ($users_chat as $user => $chat_id) {
+            if ($data['message']['chat']['id'] === $chat_id){
                 return true;
             }
         }

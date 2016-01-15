@@ -52,6 +52,8 @@ class GenTest extends PHPUnit_Framework_TestCase
 
     }
 
+
+
     public function testGenerateCode()
     {
         $user_id = 11;
@@ -61,7 +63,7 @@ class GenTest extends PHPUnit_Framework_TestCase
         $v = $this->gen->getUserCode($user_id);
         $this->checkCode($v);
 
-        //ïðîâåðÿåì, ÷òî íåëüçÿ ñãåíåðèðîâàòü êëþ÷ ñíîâà, åñëè îí óæå ñãåíåðèðîâàí
+        //Ð¿Ñ€Ð¾Ð²ÐµÑ€ÑÐµÐ¼, Ñ‡Ñ‚Ð¾ Ð½ÐµÐ»ÑŒÐ·Ñ ÑÐ³ÐµÐ½ÐµÑ€Ð¸Ñ€Ð¾Ð²Ð°Ñ‚ÑŒ ÐºÐ»ÑŽÑ‡ ÑÐ½Ð¾Ð²Ð°, ÐµÑÐ»Ð¸ Ð¾Ð½ ÑƒÐ¶Ðµ ÑÐ³ÐµÐ½ÐµÑ€Ð¸Ñ€Ð¾Ð²Ð°Ð½
         try {
             $this->gen->generateCodeForUser($user_id);
         } catch (Exception $e) {
@@ -71,5 +73,17 @@ class GenTest extends PHPUnit_Framework_TestCase
                 throw $e;
             }
         }
+    }
+
+
+    public function testReadDataFileChat()
+    {
+        $this->assertInternalType('array',$this->gen->readDataFileChat());
+    }
+
+    public function testGetUserChatId()
+    {
+        $this->assertNull($this->gen->getUserChatId(3));
+        $this->assertInternalType('integer', $this->gen->getUserChatId(1));
     }
 }
