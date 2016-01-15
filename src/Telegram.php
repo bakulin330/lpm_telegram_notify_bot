@@ -38,6 +38,7 @@ class Telegram {
         curl_setopt($handle, CURLOPT_TIMEOUT, 60);
 
         curl_setopt($handle, CURLOPT_FOLLOWLOCATION, true);
+        curl_setopt($handle, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4 );
 
         curl_setopt($handle, CURLOPT_SSL_VERIFYHOST, 0);
         curl_setopt($handle, CURLOPT_SSL_VERIFYPEER, 0);
