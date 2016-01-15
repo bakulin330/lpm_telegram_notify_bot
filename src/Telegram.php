@@ -12,7 +12,7 @@ class Telegram {
     {
         $this->token = $token;
         $this->webhook_url = $webhook_url;
-        $this->api_url = 'http://api.telegram.org/bot'.$token.'/';
+        $this->api_url = 'api.telegram.org/bot'.$token.'/';
     }
 
     public function setWebhook($flag, $cert_file_path = null)
