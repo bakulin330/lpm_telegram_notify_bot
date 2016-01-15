@@ -3,10 +3,10 @@
 $content = file_get_contents("php://input");
 $update = json_decode($content, true);
 
-//if (!$update) {
+if (!$update) {
      //receive wrong update, must not happen
-//    exit;
-//}
+    exit;
+}
 
 require_once 'config.php';
 
@@ -14,17 +14,6 @@ require_once 'config.php';
 //    $message = print_r($update, true);
 //    file_put_contents('log.txt', $message);
 //}
-
-$var = [
-    'message' => [
-        'chat' => [
-            'id' => 158922852
-        ],
-        'text' => '7702'
-    ]
-];
-$bot = new \src\Bot(new \src\VerifyUser(), new \src\Telegram(API_KEY, WEBHOOK_URL));
-$bot->process($var);
 
 if (isset($update["message"])){
     $bot = new \src\Bot(new \src\VerifyUser(), new \src\Telegram(API_KEY, WEBHOOK_URL));
