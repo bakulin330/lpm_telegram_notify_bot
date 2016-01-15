@@ -38,7 +38,10 @@ class Bot
                     break;
 
                 case '/stop':
-                    //удаляем по chat_id привязку к пользователю
+                    $users_chat = $this->readDataFile();
+                    if($this->deleteChatID($users_chat,$data)){
+                        $this->telegram->sendMessage('Вы отключили функцию уведомления',$data['message']['chat']['id']);
+                    }
                     break;
 
                 default:
@@ -65,13 +68,24 @@ class Bot
         }
     }
 
-    private function writeDataFile($data)
+    protected function writeDataFile($data)
     {
         return file_put_contents($this->data_file, "<?php return " . var_export($data, true) . ";", EXTR_OVERWRITE);
     }
 
-    public function readDataFile()
+    protected function readDataFile()
     {
         return file_exists($this->data_file) ? include $this->data_file : [];
+    }
+
+    protected function deleteChatID($users_chat,$data){
+        foreach ($users_chat as $user => $chat_id){
+            if ($data['message']['chat']['id'] === $chat_id){
+                unset($users_chat[$user]);
+                $this->writeDataFile($users_chat);
+                return true;
+            }
+        }
+        return false;
     }
 }
