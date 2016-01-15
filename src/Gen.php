@@ -11,6 +11,18 @@ class Gen
     function __construct()
     {
         $this->data_file =  DIR_TMP.'telegram_notify_code.php';
+        $this->data_file_chat =  DIR_TMP.'telegram_notify_chat.php';
+    }
+
+    public function getUserChatId($user_id)
+    {
+        $data = $this->readDataFileChat();
+        foreach ($data as $user => $chat_id) {
+            if ($user === $user_id) {
+                return $chat_id;
+            }
+        }
+        return null;
     }
 
     public function getUserCode($user_id)
@@ -23,6 +35,7 @@ class Gen
         }
         return null;
     }
+
 
     public function generateCodeForUser($user_id)
     {
@@ -38,6 +51,11 @@ class Gen
     public function readDataFile()
     {
         return file_exists($this->data_file) ? include $this->data_file : [];
+    }
+
+    public function readDataFileChat()
+    {
+        return file_exists($this->data_file_chat) ? include $this->data_file_chat : [];
     }
 
     public function writeDataFile($data)

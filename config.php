@@ -14,7 +14,8 @@ if (!defined('CONFIG_LOADED')) {
 
     include_once DIR_VENDOR . 'autoload.php';
 
-    $user_id = 89370;
+    //$user_id = 89370;
+    $user_id = 89373;
 
     define('CONFIG_LOADED', true);
 }

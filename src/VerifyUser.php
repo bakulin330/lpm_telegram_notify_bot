@@ -17,8 +17,9 @@ class VerifyUser
         $data = $gen->readDataFile();
         foreach ($data as $key => $user_id){
             if ($key == $code ){
-                return true;
-            }else return false;
+                return $user_id;
+            }
         }
+        return false;
     }
 }

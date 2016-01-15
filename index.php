@@ -15,7 +15,16 @@ require_once 'config.php';
 //    file_put_contents('log.txt', $message);
 //}
 
-
+$var = [
+    'message' => [
+        'chat' => [
+            'id' => 158922852
+        ],
+        'text' => '7702'
+    ]
+];
+$bot = new \src\Bot(new \src\VerifyUser(), new \src\Telegram(API_KEY, WEBHOOK_URL));
+$bot->process($var);
 
 if (isset($update["message"])){
     $bot = new \src\Bot(new \src\VerifyUser(), new \src\Telegram(API_KEY, WEBHOOK_URL));

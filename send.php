@@ -11,15 +11,15 @@ require_once 'config.php';
 
 if(isset($_POST["send"]) && $_POST["text"] !== ""){
     $user_message = $_POST["text"];
-    $message = "Вам пришёл заказ от пользователя с ID: *".$user_id."*.\nСообщение: _".$user_message."_";
+    $message = "Вам пришёл заказ от пользователя! \nСообщение: _".$user_message."_";
 
     //$sender->sendMessage($user_id, $message);
 
     $gen = new \src\Gen();
-    $data = $gen->getUserCode($user_id);
-    if ($data){
+    $chat_id = $gen->getUserChatId($user_id);
+    if ($chat_id){
         $bot = new \src\Telegram('156771533:AAFtGPT_o3MFuPRBnuYwOZGfNHWt_FivTy4', 'https://wp.12qw.ru/telegram/index.php');
-        $bot->sendMessage($message,158922852);
+        $bot->sendMessage($message,$chat_id);
     }else {
         echo 'Вы не подключили telegram. <a href="'.BASE_URL.'gen.php">Подключить</a>.';
     }
