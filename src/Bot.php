@@ -62,9 +62,9 @@ class Bot
             $data = $this->readDataFile();
             $data[$user_id] = $chat_id;
             $this->writeDataFile($data);
-            $this->telegram->sendWebhookMessage('OK',$chat_id);
+            $this->telegram->sendWebhookMessage('Вы успешно подключили функцию уведомления',$chat_id);
         } else {
-            $this->telegram->sendWebhookMessage('FALSE',$chat_id);
+            $this->telegram->sendWebhookMessage('Неверный код',$chat_id);
         }
     }
 
