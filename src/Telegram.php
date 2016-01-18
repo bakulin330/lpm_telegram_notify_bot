@@ -2,7 +2,7 @@
 
 namespace src;
 
-class Telegram {
+class Telegram implements TelegramInterface {
     protected $token;
     protected $webhook_url;
     protected $api_url;

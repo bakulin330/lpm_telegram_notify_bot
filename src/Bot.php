@@ -8,7 +8,7 @@ namespace src;
  * Date: 13.01.2016
  * Time: 16:05
  */
-class Bot
+class Bot implements BotInterface
 {
     /**
      * @var VerifyUser
@@ -34,13 +34,14 @@ class Bot
             switch ($data['message']['text']){
                 case '/start':
                     //выодим сообщение, что  нужно написать ключ
-
+                        return $this->telegram->sendMessage('Введите сгенерированный код',$data['message']['chat']['id']);
                     break;
 
                 case '/stop':
-                    $users_chat = $this->readDataFile();
-                    if($this->deleteChatID($users_chat,$data)){
-                        $this->telegram->sendMessage('Вы отключили функцию уведомления',$data['message']['chat']['id']);
+                    //$users_chat = $this->readDataFile();
+                    //if($this->deleteChatID($users_chat,$data)){
+                    if($this->deleteChatID($data['message']['chat']['id'])){
+                        return $this->telegram->sendMessage('Вы отключили функцию уведомления',$data['message']['chat']['id']);
                     }
                     break;
 
@@ -48,12 +49,14 @@ class Bot
                     if($this->alreadyConnected($data)) return false;
                     if (preg_match('#^\d+$#', $data['message']['text'])){
                         //число
-                        $this->connectUserByCode($data['message']['text'], $data['message']['chat']['id']);
+                        return $this->connectUserByCode($data['message']['text'], $data['message']['chat']['id']);
                     } else {
-                        $this->telegram->sendMessage('not int',$data['message']['chat']['id']);
+                        return $this->telegram->sendMessage('not int',$data['message']['chat']['id']);
                     }
             }
         }
+
+        return 'no_cmd';
     }
 
     public function connectUserByCode($code,$chat_id)
@@ -63,9 +66,9 @@ class Bot
             $data = $this->readDataFile();
             $data[$user_id] = $chat_id;
             $this->writeDataFile($data);
-            $this->telegram->sendWebhookMessage('Вы успешно подключили функцию уведомления',$chat_id);
+            return $this->telegram->sendWebhookMessage('Вы успешно подключили функцию уведомления',$chat_id);
         } else {
-            $this->telegram->sendWebhookMessage('Неверный код',$chat_id);
+            return $this->telegram->sendWebhookMessage('Неверный код',$chat_id);
         }
     }
 
@@ -79,9 +82,11 @@ class Bot
         return file_exists($this->data_file) ? include $this->data_file : [];
     }
 
-    public function deleteChatID($users_chat,$data){
+    //public function deleteChatID($users_chat,$data){
+    public function deleteChatID($search_chat_id){
+        $users_chat = $this->readDataFile();
         foreach ($users_chat as $user => $chat_id){
-            if ($data['message']['chat']['id'] === $chat_id){
+            if ($chat_id === $search_chat_id){
                 unset($users_chat[$user]);
                 $this->writeDataFile($users_chat);
                 return true;
