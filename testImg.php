@@ -7,7 +7,7 @@ $message = [
     'to' => 'test <arte.mas@mail.ru>',
     'subject' => 'test',
     'text' => 'test',
-    'html' => '<html> Image: <img src="cid:png.png"> <img src="cid:unnamed.png"> </html>',
+    'html' => '<html> Image: <img src="cid:png.png"> </html>',
     'o:tracking' => 'yes',
     'o:tracking-clicks' => 'yes',
     'o:tracking-opens' => 'yes',
