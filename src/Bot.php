@@ -38,13 +38,13 @@ class Bot implements BotInterface
                     break;
 
                 case '/stop':
-                    //$users_chat = $this->readDataFile();
-                    //if($this->deleteChatID($users_chat,$data)){
                     if($this->deleteChatID($data['message']['chat']['id'])){
                         return $this->telegram->sendMessage('Вы отключили функцию уведомления',$data['message']['chat']['id']);
                     }
                     break;
-
+                case '/help':
+                    return $this->telegram->sendMessage ("Для подключения уведомлений введите сгенерированный код \n Для отключения уведомлений введите команду /stop ", $data['message']['chat']['id']);
+                    break;
                 default:
                     if($this->alreadyConnected($data)) return false;
                     if (preg_match('#^\d+$#', $data['message']['text'])){
