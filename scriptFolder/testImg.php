@@ -1,6 +1,6 @@
 <?php
 
-include 'config.php';
+include '../config.php';
 
 $message = [
     'from' => 'me <arte.mas@mail.ru>',
@@ -11,8 +11,10 @@ $message = [
     'o:tracking' => 'yes',
     'o:tracking-clicks' => 'yes',
     'o:tracking-opens' => 'yes',
-    'inline[0]' => '@./png.png',
-    'inline[1]' => '@./unnamed.png',
+//    'inline[0]' => '@./png.png',
+//    'inline[1]' => '@./unnamed.png',
+    'inline[0]' => '@'.DIR_IMG.'png.png',
+    'inline[1]' => '@'.DIR_IMG.'unnamed.png',
 ];
 
 function send($message)

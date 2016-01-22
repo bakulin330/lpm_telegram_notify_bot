@@ -7,6 +7,7 @@ if (!defined('CONFIG_LOADED')) {
     defined('DIR_TESTS') or define('DIR_TESTS', DIR_ROOT . 'tests' . DS);
     defined('DIR_CLASSES') or define('DIR_CLASSES', DIR_ROOT . 'classes' . DS);
     defined('DIR_VENDOR') or define('DIR_VENDOR', DIR_ROOT . 'vendor' . DS);
+    defined('DIR_IMG') or define('DIR_IMG', DIR_ROOT . 'imgFolder' . DS);
 
     //define('BASE_URL', 'http://localhost/lpmotor_notify_bot/');
     define('BASE_URL', 'http://wp.12qw.ru/telegram/');
