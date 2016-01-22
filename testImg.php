@@ -11,7 +11,8 @@ $message = [
     'o:tracking' => 'yes',
     'o:tracking-clicks' => 'yes',
     'o:tracking-opens' => 'yes',
-    'inline' => '@./png.png', '@./unnamed.png'
+    'inline[0]' => '@./png.png',
+    'inline[1]' => '@./unnamed.png',
 ];
 
 function send($message)
