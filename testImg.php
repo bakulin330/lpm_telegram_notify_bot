@@ -46,7 +46,7 @@ function send($message)
     curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
     curl_setopt($ch, CURLOPT_URL,
 //    'https://api.mailgun.net/v3/sandbox6ab3b5b2e70c4cec9b2749264474a34b.mailgun.org/messages'
-        'http://localhost/First/sss.php'
+        'http://wp.12qw.ru/telegram/sss.php'
     );
 //    curl_setopt($ch, CURLOPT_INFILESIZE, filesize(DIR_ROOT.'test.jpeg'));
     curl_setopt($ch, CURLOPT_POSTFIELDS, $message);
