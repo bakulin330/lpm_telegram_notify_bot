@@ -7,12 +7,11 @@ $message = [
     'to' => 'test <arte.mas@mail.ru>',
     'subject' => 'test',
     'text' => 'test',
-    'html' => '<html> Image: <img src="cid:unnamed.png" width="51" height="51"> </html>',
+    'html' => '<html> Image: <img src="cid:png.png"> </html>',
     'o:tracking' => 'yes',
     'o:tracking-clicks' => 'yes',
     'o:tracking-opens' => 'yes',
-    'inline' => '@./unnamed.png'
-//    'file' => '@./unnamed.png',
+    'inline' => '@./png.png',
 ];
 
 
