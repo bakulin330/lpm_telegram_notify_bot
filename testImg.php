@@ -11,7 +11,8 @@ $message = [
     'o:tracking' => 'yes',
     'o:tracking-clicks' => 'yes',
     'o:tracking-opens' => 'yes',
-    'inline' => ['@'.DIR_ROOT.'unnamed.png']
+//    'inline' => ['@'.DIR_ROOT.'unnamed.png']
+    'file' => '@./unnamed.png',
 ];
 
 
