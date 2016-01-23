@@ -1,0 +1,3 @@
+WARNING!
+Your debt: %var0%
+accout to repay: %var1%

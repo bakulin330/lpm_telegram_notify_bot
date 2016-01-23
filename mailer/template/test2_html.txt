@@ -1,0 +1,3 @@
+<p style="color: red; font-size: 20px "> WARNING! </p>
+<i>Your debt: </i> <b>%var0%</b> <br>
+<p>accout to repay: %var1% </p>

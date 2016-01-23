@@ -1,0 +1,4 @@
+<h1>some template</h1>
+hello, <b> %var0%  </b> !
+<br>
+contact us: <i> %var1% </i>

@@ -1,0 +1,12 @@
+----
+2016-01-19 10:22:14
+Request has failed. Http code = . Error : 
+
+----
+2016-01-19 10:25:14
+Request has failed. Http code = . Error : 
+
+----
+2016-01-19 10:27:51
+Curl returned error 60: SSL certificate problem: unable to get local issuer certificate
+
