@@ -91,3 +91,16 @@ if(isset($_POST['preview'])){
         ->send();
 
 }
+elseif (isset($_POST['send'])) {
+    $mailer->create()
+        ->to('me <arte.mas@mail.ru>')
+        ->subject('test')
+        //->plain_message('test message')
+        //->html_message('<html> <body> <h1>h1 header</h1> <br> <hr> <hr> </body> </html>')
+        ->setIsHtml()
+        //->setIsPlain()
+        ->setLayout('test2')
+        ->setTemplate('test2')
+        ->setVariables(['arr' => 'first', 'arr2' => 'second'])
+        ->send();
+}
