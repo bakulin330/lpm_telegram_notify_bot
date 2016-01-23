@@ -8,7 +8,7 @@
     <table>
         <tr>
             <td>
-                <img src="<?=$img1?>"
+                <img src="<?=$img1?>">
             </td>
             <td>
                 <img src="<?=$img2?>">
