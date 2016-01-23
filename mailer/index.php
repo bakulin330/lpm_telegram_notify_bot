@@ -99,8 +99,8 @@ elseif (isset($_POST['send'])) {
         //->html_message('<html> <body> <h1>h1 header</h1> <br> <hr> <hr> </body> </html>')
         ->setIsHtml()
         //->setIsPlain()
-        ->setLayout('test2')
-        ->setTemplate('test2')
+        ->setLayout('test')
+        ->setTemplate('test1')
         ->setVariables(['arr' => 'first', 'arr2' => 'second'])
         ->send();
 }
