@@ -23,12 +23,6 @@ class MailgunMailer
 
     public function sendRequest(array $message, $is_preview)
     {
-
-        if($is_preview === true){
-
-        }
-
-
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_ANY);
         curl_setopt($ch, CURLOPT_USERPWD, 'api:key-b5ac1e31bdde25cdc418f44d17dd2887');
