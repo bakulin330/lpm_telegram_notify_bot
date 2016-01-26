@@ -295,8 +295,17 @@ class MailgunLetter
 
     public function is_preview ()
     {
-        $this->is_preview = true;
-        return $this;
+        $message = $this->draw();
+
+        $replace_bracket = ["<", ">"];
+        echo "<pre>";
+        echo "<b> От кого: </b>".str_replace($replace_bracket,"", $message["from"]) . "<br>";
+        echo "<b> Кому: </b>".str_replace($replace_bracket, "", $message["to"]) . "<br>";
+        echo "<b> Тема сообщения: </b>" . $message["subject"] . "<br>";
+        echo "<b> Текст сообщения: </b>" . (array_key_exists('text', $message) ? $message['text'] : $message['html']) . "<br>";
+        echo "</pre>";
+
+        return;
     }
 
 }

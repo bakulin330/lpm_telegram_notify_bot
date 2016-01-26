@@ -54,8 +54,7 @@ if(isset($_POST)){
         ->addImages(["img/someotherimg.png", "img/face.png"]);
 
     if(isset($_POST['preview'])){
-        $obj->is_preview()
-            ->send();
+        $obj->is_preview();
     }
     elseif(isset($_POST['send'])){
         $obj->send();
