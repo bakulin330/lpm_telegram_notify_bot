@@ -33,31 +33,6 @@
     <input type="submit" name="send" value="Отправить">
 </form>
 
-<!--<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>-->
-<!--<script>-->
-<!--    $(document).ready(function(){-->
-<!--        $("#preview").click(function{-->
-<!--            $.ajax({-->
-<!--                url:"index.php",-->
-<!--                type:"POST",-->
-<!--                data:({-->
-<!--                    to:$("#to").val(),-->
-<!--                    subject:$("#subject").val(),-->
-<!--                    plain_message:$("#plain_message").val(),-->
-<!--                    is_html:$("#is_html").prop("checked"),-->
-<!--                    is_layout:$("#is_layout").prop("checked"),-->
-<!--                    layout:$("#layout :selected").val(),-->
-<!--                        template:$("#template :selected").val(),-->
-<!--                        var1:$("#var1").val(),-->
-<!--                        var2:$("#var2").val(),-->
-<!--                        var3:$("#var3").val()-->
-<!--                })-->
-<!--            })-->
-<!--        })-->
-<!--    })-->
-<!--</script>-->
-
-
 <?php
 require_once 'config.php';
 require DIR_CLASSES.'MailgunLetter.php';
@@ -87,20 +62,22 @@ if(isset($_POST['preview'])){
         ->setLayout('test2')
         ->setTemplate('test2')
         ->setVariables(['arr' => 'first', 'arr2' => 'second'])
+        ->addImages(["img/img.png", "img/someotherimg.png"])
         ->is_preview()
         ->send();
-
 }
 elseif (isset($_POST['send'])) {
     $mailer->create()
-        ->to('me <arte.mas@mail.ru>')
-        ->subject('test')
-        //->plain_message('test message')
-        //->html_message('<html> <body> <h1>h1 header</h1> <br> <hr> <hr> </body> </html>')
-        ->setIsHtml()
-        //->setIsPlain()
-        ->setLayout('test')
-        ->setTemplate('test1')
-        ->setVariables(['arr' => 'first', 'arr2' => 'second'])
-        ->send();
+    ->to('me <arte.mas@mail.ru>')
+    ->subject('test')
+    //->plain_message('test message')
+    //->html_message('<html> <body> <h1>h1 header</h1> <br> <hr> <hr> </body> </html>')
+    ->setIsHtml()
+    //->setIsPlain()
+    ->setLayout('test2')
+    ->setTemplate('test2')
+    ->setVariables(['arr' => 'first', 'arr2' => 'second'])
+    ->addImages(["img/img.png", "img/someotherimg.png"])
+    ->send();
+
 }

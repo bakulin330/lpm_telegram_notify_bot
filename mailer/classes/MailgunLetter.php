@@ -20,6 +20,7 @@ class MailgunLetter
     protected $template;
     protected $variables = [];
     protected $is_preview = false;
+    protected $images = [];
 
     /**
      * @var MailgunMailer
@@ -121,6 +122,40 @@ class MailgunLetter
         return $this;
     }
 
+    public function getVariables()
+    {
+        return $this->variables;
+    }
+
+
+
+    public function addImages(array $images)
+    {
+        $this->images = $images;
+        return $this;
+    }
+
+    public function drawLayout2($tpl_path, array $vars = [], array $images)
+    {
+        $imgs = [];
+        if ($this->is_preview === true){
+            for ($i = 0; $i < count($images); $i++){
+                $imgs["img$i"] = $images[$i];
+            }
+        }else {
+            for ($i = 0; $i < count($images); $i++) {
+                $image = preg_replace("/^.*\//", "", $images[$i]);
+                $imgs["img$i"] = "cid:$image";
+            }
+        }
+        if (count($vars)>0){
+            extract($vars);
+        }
+        extract($imgs);
+        ob_start();
+        include $tpl_path;
+        return ob_get_clean();
+    }
 
 
 
@@ -195,30 +230,16 @@ class MailgunLetter
             }
             if ($this->is_html) {
                 $content = $this->drawTemplate(DIR_TEMPLATE . $this->template . "_html.php", $this->variables);
-                $post['html'] = $this->drawLayout(DIR_LAYOUTS . $this->layout . "_html.php", array_merge($this->variables, ['content'=>$content]));
+//                $post['html'] = $this->drawLayout(DIR_LAYOUTS . $this->layout . "_html.php", array_merge($this->variables, ['content'=>$content]));
+                $post['html'] = $this->drawLayout2(DIR_LAYOUTS . $this->layout . "_html.php", array_merge($this->variables, ['content'=>$content]), $this->images);
 
-                $post += $this->getLayoutImages($this->layout);
+//                $post += $this->getLayoutImages($this->layout);
+
+                $post = $this->getLayoutImages2($post);
             }
-//            for ($i = 0; $i < count($this->variables); $i++){
-//                $template_data = str_replace ( "%var$i%", $this->variables[$i], $template_data );
-//            }
-//            $message = $template_data;
             return $post;
         }
 
-//        if(!empty($this->layout)){
-//            if($this->is_html === true) {
-//                $layout_data = file_get_contents(DIR_LAYOUTS . $this->layout . ".html");
-//                $message = str_replace( "%template%", $template_data, $layout_data );
-//            }
-//        }
-//
-//        $post['html'] = $message;
-//
-//
-//
-//
-//        return $post;
         throw new Exception('error');
     }
 
@@ -227,6 +248,18 @@ class MailgunLetter
 //        'img2' => '.././img/test2',
 //
 //    ];
+
+    public function getLayoutImages2($post)
+    {
+        for ($i = 0; $i < count($this->images); $i++){
+            $image = preg_replace("/^.*\//", "", $this->images[$i]);
+            $post+= [
+                //"inline[$i]" => "@".DIR_ROOT.$this->images[$i]
+                "inline[$i]" => "@".DIR_ROOT.'img'.DS.$image,
+            ];
+        }
+        return $post;
+    }
 
     public function getLayoutImages($layout)
     {
@@ -242,6 +275,7 @@ class MailgunLetter
                     'inline[0]' => '@'.DIR_IMG.$layout.DS.'img1.png',
                     'inline[1]' => '@'.DIR_IMG.$layout.DS.'img2.png',
                 ];
+            default: throw new Exception('Has no such layout');
         }
     }
 

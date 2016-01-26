@@ -24,42 +24,6 @@ class MailgunMailer
     public function sendRequest(array $message, $is_preview)
     {
 
-//        $this->message_data = $message;
-
-//        if(isset($layout)){
-//            $layout_data = file_get_contents($this->layout_dir . $layout . '.html');
-//            $message['html'] = $layout_data;
-//        }
-
-//        if(isset($layout)){
-//            $layout_data = $this->getLayout($layout);
-//            $this->message_data['html'] = $layout_data;
-//        }
-
-
-//        if(isset($template)){
-//            $template_data = include $this->template_dir.$template.'.php';
-//            for ($i = 0; $i < count($template_data); $i++ ){
-//                $message['html'] = str_replace( "%message$i%", $template_data[$i], $message['html'] );
-//            }
-//        }
-
-//        if(isset($template)){
-//            $template_data = $this->getTemplate($template);
-//            $this->includeTemplate($template_data);
-//        }
-
-//        if(!empty($variables)){
-//            for ($i = 0; $i < count($variables); $i++){
-//                $message['html'] = str_replace ( "%var$i%", $variables[$i], $message['html'] );
-//            }
-//        }
-
-//        if(!empty($variables)){
-//            $this->includeVariables($variables);
-//        }
-
-
         if($is_preview === true){
             $replace_bracket = ["<", ">"];
             echo "<pre>";
@@ -118,17 +82,4 @@ class MailgunMailer
         return include $this->template_dir.$template.'.php';
     }
 
-    public function includeTemplate($template_data)
-    {
-        for ($i = 0; $i < count($template_data); $i++ ){
-            $this->message_data['html'] = str_replace( "%message$i%", $template_data[$i], $this->message_data['html'] );
-        }
-    }
-
-    public function includeVariables($variables)
-    {
-        for ($i = 0; $i < count($variables); $i++){
-            $this->message_data['html'] = str_replace ( "%var$i%", $variables[$i], $this->message_data['html'] );
-        }
-    }
 }

@@ -10,6 +10,7 @@
     <file url="file://$PROJECT_DIR$/layouts/test_html.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/layouts/test_text.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/mail.errors.log" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sss.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/template/hello.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/template/test1_html.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/template/test1_text.php" charset="UTF-8" />
@@ -19,5 +20,6 @@
     <file url="file://$PROJECT_DIR$/template/test2_text.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/testImg.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/tests/MailgunLetterTest.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/tests/PHPUnitTest.php" charset="UTF-8" />
   </component>
 </project>

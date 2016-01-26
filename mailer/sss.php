@@ -6,4 +6,4 @@
  * Time: 10:12
  */
 
-echo '<pre>POST: '.print_r($_POST,true).', FILES: '.print_r($_FILES,true).'</pre>';
+echo preg_replace("/^.*\//",'',"folder/images/image3.png");
