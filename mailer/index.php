@@ -40,19 +40,8 @@ require DIR_CLASSES.'MailgunMailer.php';
 
 
 $mailer = new MailgunMailer('url','key');
-//$mailer->create()
-//    ->to('me <arte.mas@mail.ru>')
-//    ->subject('test')
-//    ->plain_message('test message')
-//    ->html_message('<html> <body> <h1>h1 header</h1> <br> <hr> <hr> </body> </html>')
-//    ->setIsHtml()
-//    ->setLayout('action')
-//    ->setTemplate('hello')
-//    ->setVariables(['first', 'second', 'third'])
-//    ->send();
-
-if(isset($_POST['preview'])){
-    $mailer->create()
+if(isset($_POST)){
+    $obj = $mailer->create()
         ->to('me <arte.mas@mail.ru>')
         ->subject('test')
         //->plain_message('<b>Hello</b>')
@@ -62,22 +51,13 @@ if(isset($_POST['preview'])){
         ->setLayout('test2')
         ->setTemplate('test2')
         ->setVariables(['arr' => 'first', 'arr2' => 'second'])
-        ->addImages(["img/img.png", "img/someotherimg.png"])
-        ->is_preview()
-        ->send();
-}
-elseif (isset($_POST['send'])) {
-    $mailer->create()
-    ->to('me <arte.mas@mail.ru>')
-    ->subject('test')
-    //->plain_message('test message')
-    //->html_message('<html> <body> <h1>h1 header</h1> <br> <hr> <hr> </body> </html>')
-    ->setIsHtml()
-    //->setIsPlain()
-    ->setLayout('test2')
-    ->setTemplate('test2')
-    ->setVariables(['arr' => 'first', 'arr2' => 'second'])
-    ->addImages(["img/img.png", "img/someotherimg.png"])
-    ->send();
+        ->addImages(["img/someotherimg.png", "img/face.png"]);
 
+    if(isset($_POST['preview'])){
+        $obj->is_preview()
+            ->send();
+    }
+    elseif(isset($_POST['send'])){
+        $obj->send();
+    }
 }
