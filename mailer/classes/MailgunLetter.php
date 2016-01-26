@@ -295,6 +295,8 @@ class MailgunLetter
 
     public function is_preview ()
     {
+        $this->is_preview = true;
+
         $message = $this->draw();
 
         $replace_bracket = ["<", ">"];
