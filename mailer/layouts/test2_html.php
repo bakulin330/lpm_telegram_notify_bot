@@ -8,10 +8,10 @@
     <table>
         <tr>
             <td>
-                <img src="<?=$img0?>">
+                <img src="cid:someotherimg.png">
             </td>
             <td>
-                <img src="<?=$img1?>">
+                <img src="cid:face.png">
             </td>
         </tr>
     </table>

@@ -137,21 +137,9 @@ class MailgunLetter
 
     public function drawLayout($tpl_path, array $vars = [], array $images)
     {
-        $imgs = [];
-        if ($this->is_preview === true){
-            for ($i = 0; $i < count($images); $i++){
-                $imgs["img$i"] = $images[$i];
-            }
-        }else {
-            for ($i = 0; $i < count($images); $i++) {
-                $image = preg_replace("/^.*\//", "", $images[$i]);
-                $imgs["img$i"] = "cid:$image";
-            }
-        }
         if (count($vars)>0){
             extract($vars);
         }
-        extract($imgs);
         ob_start();
         include $tpl_path;
         return ob_get_clean();
@@ -255,7 +243,6 @@ class MailgunLetter
         for ($i = 0; $i < count($this->images); $i++){
             $image = preg_replace("/^.*\//", "", $this->images[$i]);
             $post+= [
-                //"inline[$i]" => "@".DIR_ROOT.$this->images[$i]
                 "attachment[$i]" => "@".DIR_ROOT.'img'.DS.$image,
             ];
         }
@@ -267,7 +254,6 @@ class MailgunLetter
         for ($i = 0; $i < count($this->images); $i++){
             $image = preg_replace("/^.*\//", "", $this->images[$i]);
             $post+= [
-                //"inline[$i]" => "@".DIR_ROOT.$this->images[$i]
                 "inline[$i]" => "@".DIR_ROOT.'img'.DS.$image,
             ];
         }
@@ -296,8 +282,12 @@ class MailgunLetter
     public function is_preview ()
     {
         $this->is_preview = true;
-
         $message = $this->draw();
+
+        for ( $i = 0; $i < count($this->images); $i++){
+            $replace = pathinfo($this->images[$i]);
+            $message['html'] = str_replace("cid:".$replace['basename'], $replace['dirname'].DS.$replace['basename'], $message['html']);
+        }
 
         $replace_bracket = ["<", ">"];
         echo "<pre>";
