@@ -6,7 +6,7 @@
     <title></title>
 </head>
 <body>
-<img src="<?=$img1?>">
+<img src="cid:face.png">
 <table>
     <tr>
         <td style="background-color: #65D2D1; bgcolor: #65D2D1; border: 4px solid yellow; width: 200px; height: 200px">
@@ -16,6 +16,6 @@
         </td>
     </tr>
 </table>
-<img src="<?=$img2?>">
+<img src="cid:unnamed.png">
 </body>
 </html>
