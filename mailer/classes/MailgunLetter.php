@@ -194,7 +194,6 @@ class MailgunLetter
 
     public function draw()
     {
-        $template_data = "";
 
         $post = [
             'from'=>$this->from,
@@ -277,13 +276,11 @@ class MailgunLetter
     {
         $this->is_preview = true;
         $message = $this->draw();
-//        $images = array_merge($this->layout_images,$this->template_images);
 
         for ( $i = 0; $i < count($this->images); $i++){
 
             $replace = pathinfo($this->images[$i]);
             $message['html'] = str_replace("cid:".$replace['basename'], $replace['dirname'].DS.$replace['basename'], $message['html']);
-//            $message['html'] = $this->images[$i];
         }
 
 
