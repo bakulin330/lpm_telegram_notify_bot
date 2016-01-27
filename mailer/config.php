@@ -6,3 +6,6 @@ defined('DIR_TEMPLATE') or define('DIR_TEMPLATE', DIR_ROOT . 'template' . DS);
 defined('DIR_LAYOUTS') or define('DIR_LAYOUTS', DIR_ROOT . 'layouts' . DS);
 defined('DIR_IMG_SRC') or define('DIR_IMG_SRC', 'img' . DS);
 defined('DIR_IMG') or define('DIR_IMG', DIR_ROOT. 'img' . DS);
+//defined('BASE_URL') or define('BASE_URL','http://localhost:63342/lpmotor_notify_bot/mailer/');
+defined('BASE_URL') or define('BASE_URL','http://wp.12qw.ru/telegram/mailer/');
+//define(BASE_URL,'http://wp.12qw.ru/telegram/mailer/');

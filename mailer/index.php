@@ -50,7 +50,8 @@ if(isset($_POST)){
         //->setIsPlain()
         ->setTemplate('test1')
         ->setLayout('test2')
-        ->addImages(['img/someotherimg.png','unnamed.png','img/img.png'])
+        ->addInlineImages([DIR_ROOT.'img/someotherimg.png',DIR_ROOT.'unnamed.png',DIR_ROOT.'img/img.png'])
+        ->addAttachments([])
         ->setVariables(['arr' => 'first', 'arr2' => 'second']);
 
     if(isset($_POST['preview'])){

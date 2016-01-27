@@ -21,6 +21,7 @@ class MailgunLetter
     protected $variables = [];
     protected $is_preview = false;
     protected $images = [];
+    protected $files = [];
 
     /**
      * @var MailgunMailer
@@ -204,6 +205,14 @@ class MailgunLetter
             'o:tracking-opens'=>'yes',
         ];
 
+        if(!empty($this->files)){
+            for ($i = 0; $i < count($this->files); $i++){
+                $post+= [
+                    "attachment[$i]" => "@".$this->files[$i],
+                ];
+            }
+        }
+
         if(!empty($this->plain_message)){
             $post['text'] = $this->plain_message;
             return $post;
@@ -222,36 +231,55 @@ class MailgunLetter
             if ($this->is_html) {
                 $content = $this->drawTemplate(DIR_TEMPLATE . $this->template . "_html.php", $this->variables);
                 $post['html'] = $this->drawLayout(DIR_LAYOUTS . $this->layout . "_html.php", array_merge($this->variables, ['content'=>$content]));
+                if(!empty($this->images)){
+                    for ($i = 0; $i < count($this->images); $i++){
+                        $post+= [
+                            "inline[$i]" => "@".$this->images[$i],
+                        ];
+                    }
+                }
 
-                $post = $this->inlineImages($post);
-                $post = $this->attachImages($post);
+//                $post = $this->inlineImages($post);
+//                $post = $this->attachImages($post);
             }
             return $post;
         }
 
         throw new Exception('error');
     }
+
+    public function addInlineImages(array $images = [])
+    {
+        $this->images = $images;
+        return $this;
+    }
+
+    public function addAttachments(array $files = [])
+    {
+        $this->files = $files;
+        return $this;
+    }
     
 
-    public function attachImages($post)
-    {
-        for ($i = 0; $i < count($this->images); $i++){
-            $post+= [
-                "attachment[$i]" => "@".DIR_ROOT.$this->images[$i],
-            ];
-        }
-        return $post;
-    }
-
-    public function inlineImages($post)
-    {
-        for ($i = 0; $i < count($this->images); $i++){
-            $post+= [
-                "inline[$i]" => "@".DIR_ROOT.$this->images[$i],
-            ];
-        }
-        return $post;
-    }
+//    public function attachImages($post)
+//    {
+//        for ($i = 0; $i < count($this->images); $i++){
+//            $post+= [
+//                "attachment[$i]" => "@".$this->images[$i],
+//            ];
+//        }
+//        return $post;
+//    }
+//
+//    public function inlineImages($post)
+//    {
+//        for ($i = 0; $i < count($this->images); $i++){
+//            $post+= [
+//                "inline[$i]" => "@".$this->images[$i],
+//            ];
+//        }
+//        return $post;
+//    }
 
 //    public function getLayoutImages($layout)
 //    {
@@ -281,7 +309,7 @@ class MailgunLetter
             for ( $i = 0; $i < count($this->images); $i++){
 
                 $replace = pathinfo($this->images[$i]);
-                $message['html'] = str_replace("cid:".$replace['basename'], $replace['dirname'].DS.$replace['basename'], $message['html']);
+                $message['html'] = str_replace("cid:".$replace['basename'], str_replace(DIR_ROOT, BASE_URL, $this->images[$i]), $message['html']); //$replace['dirname'].DS.$replace['basename'], $message['html']);
             }
         }
 
