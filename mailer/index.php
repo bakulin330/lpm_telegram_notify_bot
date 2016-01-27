@@ -50,9 +50,8 @@ if(isset($_POST)){
         //->setIsPlain()
         ->setTemplate('test1')
         ->setLayout('test2')
-        ->setVariables(['arr' => 'first', 'arr2' => 'second'])
-        ->addImages(['img/someotherimg.png','unnamed.png','img/img.png']);
-
+        ->addImages(['img/someotherimg.png','unnamed.png','img/img.png'])
+        ->setVariables(['arr' => 'first', 'arr2' => 'second']);
 
     if(isset($_POST['preview'])){
         $obj->is_preview();

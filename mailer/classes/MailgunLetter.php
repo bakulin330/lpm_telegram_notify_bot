@@ -277,12 +277,13 @@ class MailgunLetter
         $this->is_preview = true;
         $message = $this->draw();
 
-        for ( $i = 0; $i < count($this->images); $i++){
+        if(isset($this->images)){
+            for ( $i = 0; $i < count($this->images); $i++){
 
-            $replace = pathinfo($this->images[$i]);
-            $message['html'] = str_replace("cid:".$replace['basename'], $replace['dirname'].DS.$replace['basename'], $message['html']);
+                $replace = pathinfo($this->images[$i]);
+                $message['html'] = str_replace("cid:".$replace['basename'], $replace['dirname'].DS.$replace['basename'], $message['html']);
+            }
         }
-
 
 
         $replace_bracket = ["<", ">"];
