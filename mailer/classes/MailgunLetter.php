@@ -222,7 +222,6 @@ class MailgunLetter
             }
             if ($this->is_html) {
                 $content = $this->drawTemplate(DIR_TEMPLATE . $this->template . "_html.php", $this->variables);
-//                $post['html'] = $this->drawLayout(DIR_LAYOUTS . $this->layout . "_html.php", array_merge($this->variables, ['content'=>$content]));
                 $post['html'] = $this->drawLayout(DIR_LAYOUTS . $this->layout . "_html.php", array_merge($this->variables, ['content'=>$content]));
 
                 $post = $this->inlineImages($post);
@@ -237,9 +236,7 @@ class MailgunLetter
 
     public function attachImages($post)
     {
-        //$images = array_merge($this->layout_images,$this->template_images);
         for ($i = 0; $i < count($this->images); $i++){
-            $image = pathinfo($this->images[$i]);
             $post+= [
                 "attachment[$i]" => "@".DIR_ROOT.$this->images[$i],
             ];
@@ -249,9 +246,7 @@ class MailgunLetter
 
     public function inlineImages($post)
     {
-        //$images = array_merge($this->layout_images,$this->template_images);
         for ($i = 0; $i < count($this->images); $i++){
-            $image = pathinfo($this->images[$i]);
             $post+= [
                 "inline[$i]" => "@".DIR_ROOT.$this->images[$i],
             ];
