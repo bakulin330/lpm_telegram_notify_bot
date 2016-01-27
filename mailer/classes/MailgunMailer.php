@@ -23,6 +23,20 @@ class MailgunMailer
 
     public function sendRequest(array $message, $is_preview)
     {
+
+        if($is_preview === true){
+            $replace_bracket = ["<", ">"];
+            echo "<pre>";
+            echo "<b> От кого: </b>".str_replace($replace_bracket,"", $message["from"]) . "<br>";
+            echo "<b> Кому: </b>".str_replace($replace_bracket, "", $message["to"]) . "<br>";
+            echo "<b> Тема сообщения: </b>" . $message["subject"] . "<br>";
+            echo "<b> Текст сообщения: </b>" . (array_key_exists('text', $message) ? $message['text'] : $message['html']) . "<br>";
+            echo "</pre>";
+
+            return;
+        }
+
+
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_ANY);
         curl_setopt($ch, CURLOPT_USERPWD, 'api:key-b5ac1e31bdde25cdc418f44d17dd2887');

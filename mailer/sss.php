@@ -6,4 +6,6 @@
  * Time: 10:12
  */
 
-echo preg_replace("/^.*\//",'',"folder/images/image3.png");
+// echo preg_replace("/^.*\//",'',"folder/images/image3.png");
+
+ print_r(pathinfo('/img/img.png'));
