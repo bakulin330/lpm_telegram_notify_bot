@@ -241,7 +241,7 @@ class MailgunLetter
         for ($i = 0; $i < count($this->images); $i++){
             $image = pathinfo($this->images[$i]);
             $post+= [
-                "attachment[$i]" => "@".DIR_ROOT.substr($image['dirname'], 0).DS.$image['basename'],
+                "attachment[$i]" => "@".DIR_ROOT.$this->images[$i],
             ];
         }
         return $post;
@@ -253,7 +253,7 @@ class MailgunLetter
         for ($i = 0; $i < count($this->images); $i++){
             $image = pathinfo($this->images[$i]);
             $post+= [
-                "inline[$i]" => "@".DIR_ROOT.substr($image['dirname'], 0).DS.$image['basename'],
+                "inline[$i]" => "@".DIR_ROOT.$this->images[$i],
             ];
         }
         return $post;

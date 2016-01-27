@@ -48,10 +48,10 @@ if(isset($_POST)){
         //->html_message('<html> <body> <h1>h1 header</h1> <br> <hr> <hr> </body> </html>')
         ->setIsHtml()
         //->setIsPlain()
+        ->setTemplate('test1')
         ->setLayout('test2')
-        ->setTemplate('test2')
         ->setVariables(['arr' => 'first', 'arr2' => 'second'])
-        ->addImages(['img/face.png','img/someotherimg.png','unnamed.png']);
+        ->addImages(['img/someotherimg.png','unnamed.png','img/img.png']);
 
 
     if(isset($_POST['preview'])){
