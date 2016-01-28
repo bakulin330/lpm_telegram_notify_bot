@@ -220,6 +220,13 @@ class MailgunLetter
 
         if(!empty($this->html_message)){
             $post['html'] = $this->html_message;
+            if(!empty($this->images)){
+                for ($i = 0; $i < count($this->images); $i++){
+                    $post+= [
+                        "inline[$i]" => "@".$this->images[$i],
+                    ];
+                }
+            }
             return $post;
         }
 
