@@ -23,6 +23,7 @@ if (system.args.length === 1) {
         if (status !== 'success') {
             console.log('FAIL to load the address');
         } else {
+            console.log('success');
             window.setTimeout(function () {
                 page.render(output);
                 phantom.exit();
