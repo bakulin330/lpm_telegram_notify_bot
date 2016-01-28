@@ -27,6 +27,7 @@ class WebShot
 //        }
 
         $command = "phantomjs ".DIR_SCRIPT."getScreenshot.js $this->url ".DIR_TMP.$this->file_name.".png $this->browser_width $this->browser_height";
+        $command = "phantomjs ./script/getScreenshot.js $this->url ".DIR_TMP.$this->file_name.".png $this->browser_width $this->browser_height";
         exec($command, $out, $ret);
         $link = DIR_TMP.$this->file_name.".png";
         echo 'cmd:'.$command."<br/>ret:".print_r($ret,true)."<br/>out:".print_r($out,true);
