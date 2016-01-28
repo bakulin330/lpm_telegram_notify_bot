@@ -1,6 +1,6 @@
 <form method="post" action="">
-    <label>URL: <input type="text" name="url" value="http://wix.com"> </label>
-    <label>Название картинки: <input type="text" name="file_name" value="wix"> </label> <br/>
+    <label>URL: <input type="text" name="url" > </label>
+    <label>Название картинки: <input type="text" name="file_name"> </label> <br/>
     <label>browser width: <input type="text" name="browser_width"></label>
     <label>browser height: <input type="text" name="browser_height"></label> <br />
 <!--    <label>image width: <input type="text" name="image_width"></label>-->
