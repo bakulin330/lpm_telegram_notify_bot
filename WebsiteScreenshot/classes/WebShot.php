@@ -27,9 +27,9 @@ class WebShot
 //        }
 
         $command = "$ phantomjs ".DIR_SCRIPT."getScreenshot.js $this->url ".DIR_TMP.$this->file_name.".png $this->browser_width $this->browser_height";
-        exec($command, $out, $ret);
+        $ret = shell_exec($command);
         $link = DIR_TMP.$this->file_name.".png";
-        echo 'cmd:'.$command."<br/>ret:".print_r($ret,true)."<br/>out:".print_r($out,true);
+        echo 'cmd:'.$command."<br/>ret:".print_r($ret,true)."<br/>out:";
 
         if(file_exists($link)){
             echo "Скриншот сделан . Посмотреть можно пройдя по <a href='".BASE_URL."tmp".DS.$this->file_name.".png' target='_blank'>этой ссылке</a>";
