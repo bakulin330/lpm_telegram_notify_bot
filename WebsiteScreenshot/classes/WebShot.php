@@ -36,7 +36,7 @@ class WebShot
 //        $escape_command = escapeshellcmd($command);
 //        echo shell_exec("$escape_command");
 
-        echo shell_exec("phantomjs -v");
+        echo shell_exec(escapeshellcmd("phantomjs -v"));
 
         if(file_exists($link)){
             echo "Скриншот сделан . Посмотреть можно пройдя по <a href='".BASE_URL."tmp".DS.$this->file_name.".png' target='_blank'>этой ссылке</a>";
