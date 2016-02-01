@@ -29,17 +29,28 @@ class Bot
 
         $params += $par;
 
-        $result = file_get_contents($url, false, stream_context_create(array(
-            "ssl"=>array(
-                "verify_peer"=>false,
-                "verify_peer_name"=>false,
-            ),
-            'http' => array(
-                'method'  => 'POST',
-                'header'  => 'Content-type: application/x-www-form-urlencoded',
-                'content' => http_build_query($params)
-            )
-        )));
+        $handle = curl_init($url);
+        curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($handle, CURLOPT_CONNECTTIMEOUT, 5);
+        curl_setopt($handle, CURLOPT_TIMEOUT, 60);
+        curl_setopt($handle, CURLOPT_POSTFIELDS, json_encode($params));
+        curl_setopt($handle, CURLOPT_HTTPHEADER, array("Content-Type: application/json"));
+        curl_setopt($handle, CURLOPT_SSL_VERIFYHOST, 0);
+        curl_setopt($handle, CURLOPT_SSL_VERIFYPEER, 0);
+        $result = curl_exec($handle);
+        var_dump($result);
+
+//        $result = file_get_contents($url, false, stream_context_create(array(
+//            "ssl"=>array(
+//                "verify_peer"=>false,
+//                "verify_peer_name"=>false,
+//            ),
+//            'http' => array(
+//                'method'  => 'POST',
+//                'header'  => 'Content-type: application/x-www-form-urlencoded',
+//                'content' => http_build_query($params)
+//            )
+//        )));
 
         return $result;
     }
