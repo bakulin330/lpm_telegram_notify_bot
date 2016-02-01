@@ -7,4 +7,4 @@
  */
 ?>
 
-<a href="https://oauth.vk.com/authorize?client_id=5256044&display=page&redirect_uri=http://<?=$_SERVER['HTTP_HOST'];?>&scope=friends,messages,offline&response_type=code&v=5.44">code</a>
+<a href="https://oauth.vk.com/authorize?client_id=5256044&display=page&redirect_uri=http://<?=$_SERVER['HTTP_HOST'];?>/telegram/VkBot/code.php&scope=friends,messages,offline&response_type=code&v=5.44">code</a>
