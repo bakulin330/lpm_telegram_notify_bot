@@ -45,7 +45,7 @@ class Bot
             'http' => array(
                 'method'  => 'POST',
                 'header'  => 'Content-type: application/x-www-form-urlencoded',
-                'content' => "?".http_build_query($params)
+                'content' => http_build_query($params)
             )
         )));
 
