@@ -9,8 +9,8 @@ if (!defined('CONFIG_LOADED')) {
     defined('DIR_VENDOR') or define('DIR_VENDOR', DIR_ROOT . 'vendor' . DS);
     defined('DIR_IMG') or define('DIR_IMG', DIR_ROOT . 'imgFolder' . DS);
 
-    define('BASE_URL', 'http://localhost/VKapi/');
-    //define('BASE_URL', 'http://wp.12qw.ru/telegram/');
+//    define('BASE_URL', 'http://localhost/VKapi/');
+    define('BASE_URL', 'http://wp.12qw.ru/telegram/VkBot');
     define('API_KEY', '156771533:AAFtGPT_o3MFuPRBnuYwOZGfNHWt_FivTy4');
     define('WEBHOOK_URL', 'https://wp.12qw.ru/telegram/index.php');
 
