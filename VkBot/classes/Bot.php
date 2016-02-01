@@ -29,6 +29,10 @@ class Bot
 
         $params += $par;
 
+        $vd = http_build_query($params);
+        var_dump($vd);
+        var_dump($url);
+
         $result = file_get_contents($url, false, stream_context_create(array(
             "ssl"=>array(
                 "verify_peer"=>false,
