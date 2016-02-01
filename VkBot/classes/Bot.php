@@ -14,7 +14,7 @@ class Bot
     {
         $this->db = new DatabaseImitation();
         $this->url = 'https://api.vk.com/method/';
-        $this->access_token = "cf61bb5d146bd7a0c7a1ecbf68e42f5b6026575bf8fe0c8f30ba99f4383815bcd6e676bd358355aba4370";
+        $this->access_token = "6569c543dc1319c310f6c9f3de8f8fad877955ae8ee1977dab6b3b226d2f2557bc2555ef641adf2d29463";
         $this->bot_id = 16309784;
     }
 
@@ -38,7 +38,8 @@ class Bot
         curl_setopt($handle, CURLOPT_POST, true);
         curl_setopt($handle, CURLOPT_TIMEOUT, 60);
         curl_setopt($handle, CURLOPT_POSTFIELDS, $params);
-        curl_setopt($handle, CURLOPT_HTTPHEADER, array("Content-type: application/x-www-form-urlencoded'"));
+//        curl_setopt($handle, CURLOPT_HTTPHEADER, array("Content-type: application/x-www-form-urlencoded'"));
+        curl_setopt($handle, CURLOPT_HTTPHEADER, array("Content-type: multipart/form-data"));
         curl_setopt($handle, CURLOPT_SSL_VERIFYHOST, 0);
         curl_setopt($handle, CURLOPT_SSL_VERIFYPEER, 0);
         $result = curl_exec($handle);
