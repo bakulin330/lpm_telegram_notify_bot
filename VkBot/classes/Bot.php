@@ -83,7 +83,7 @@ class Bot
 
         $result = $this->sendRequest("messages.getDialogs", $params);
         $result = json_decode($result,true);
-        //var_dump($result);
+        var_dump($result);
         if($result['response']['items']) $this->checkMessages($result['response']['items']);
     }
 
