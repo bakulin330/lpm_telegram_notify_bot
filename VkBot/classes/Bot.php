@@ -14,7 +14,7 @@ class Bot
     {
         $this->db = new DatabaseImitation();
         $this->url = 'https://api.vk.com/method/';
-        $this->access_token = "6569c543dc1319c310f6c9f3de8f8fad877955ae8ee1977dab6b3b226d2f2557bc2555ef641adf2d29463";
+        $this->access_token = "9f9a7a16f4b31d712d1df6d7e9b0de63f7fa102b794b4be8ab3c8d61962b0988e05b8f5e7b741019a0257";
         $this->bot_id = 16309784;
     }
 
@@ -29,36 +29,36 @@ class Bot
 
         $params += $par;
 
-        echo 'params: '.vd( $params ).'<br/>';
+//        echo 'params: '.vd( $params ).'<br/>';
 //        $opt = "count=1&unread=1&preview_length=10&access_token=$this->access_token&v=$this->v";
 
-        $handle = curl_init($url);
-        curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($handle, CURLOPT_CONNECTTIMEOUT, 5);
-        curl_setopt($handle, CURLOPT_POST, true);
-        curl_setopt($handle, CURLOPT_TIMEOUT, 60);
-        curl_setopt($handle, CURLOPT_POSTFIELDS, $params);
+//        $handle = curl_init($url);
+//        curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
+//        curl_setopt($handle, CURLOPT_CONNECTTIMEOUT, 5);
+//        curl_setopt($handle, CURLOPT_POST, true);
+//        curl_setopt($handle, CURLOPT_TIMEOUT, 60);
+//        curl_setopt($handle, CURLOPT_POSTFIELDS, $params);
 //        curl_setopt($handle, CURLOPT_HTTPHEADER, array("Content-type: application/x-www-form-urlencoded'"));
-        curl_setopt($handle, CURLOPT_HTTPHEADER, array("Content-type: multipart/form-data"));
-        curl_setopt($handle, CURLOPT_SSL_VERIFYHOST, 0);
-        curl_setopt($handle, CURLOPT_SSL_VERIFYPEER, 0);
-        $result = curl_exec($handle);
-        $code = curl_getinfo($handle,CURLINFO_HTTP_CODE );
+//        curl_setopt($handle, CURLOPT_HTTPHEADER, array("Content-type: multipart/form-data"));
+//        curl_setopt($handle, CURLOPT_SSL_VERIFYHOST, 0);
+//        curl_setopt($handle, CURLOPT_SSL_VERIFYPEER, 0);
+//        $result = curl_exec($handle);
+//        $code = curl_getinfo($handle,CURLINFO_HTTP_CODE );
+//
+//        echo 'status: '.vd($code).'<br/>';
+//        echo 'result: '.vd($result).'<br/>';
 
-        echo 'status: '.vd($code).'<br/>';
-        echo 'result: '.vd($result).'<br/>';
-
-//        $result = file_get_contents($url, false, stream_context_create(array(
-//            "ssl"=>array(
-//                "verify_peer"=>false,
-//                "verify_peer_name"=>false,
-//            ),
-//            'http' => array(
-//                'method'  => 'POST',
-//                'header'  => 'Content-type: application/x-www-form-urlencoded',
-//                'content' => http_build_query($params)
-//            )
-//        )));
+        $result = file_get_contents($url, false, stream_context_create(array(
+            "ssl"=>array(
+                "verify_peer"=>false,
+                "verify_peer_name"=>false,
+            ),
+            'http' => array(
+                'method'  => 'POST',
+                'header'  => 'Content-type: application/x-www-form-urlencoded',
+                'content' => http_build_query($params)
+            )
+        )));
 
         return $result;
     }
