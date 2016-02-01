@@ -29,20 +29,23 @@ class Bot
 
         $params += $par;
 
-//        var_dump( $params );
-        $opt = "count=1&unread=1&preview_length=10&access_token=$this->access_token&v=$this->v";
+        echo 'params: '.vd( $params ).'<br/>';
+//        $opt = "count=1&unread=1&preview_length=10&access_token=$this->access_token&v=$this->v";
 
         $handle = curl_init($url);
         curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($handle, CURLOPT_CONNECTTIMEOUT, 5);
         curl_setopt($handle, CURLOPT_POST, true);
         curl_setopt($handle, CURLOPT_TIMEOUT, 60);
-        curl_setopt($handle, CURLOPT_POSTFIELDS, $opt);
+        curl_setopt($handle, CURLOPT_POSTFIELDS, $params);
         curl_setopt($handle, CURLOPT_HTTPHEADER, array("Content-type: application/x-www-form-urlencoded'"));
         curl_setopt($handle, CURLOPT_SSL_VERIFYHOST, 0);
         curl_setopt($handle, CURLOPT_SSL_VERIFYPEER, 0);
         $result = curl_exec($handle);
-        var_dump($result);
+        $code = curl_getinfo($handle,CURLINFO_HTTP_CODE );
+
+        echo 'status: '.vd($code).'<br/>';
+        echo 'result: '.vd($result).'<br/>';
 
 //        $result = file_get_contents($url, false, stream_context_create(array(
 //            "ssl"=>array(
@@ -79,7 +82,7 @@ class Bot
 
         $result = $this->sendRequest("messages.getDialogs", $params);
         $result = json_decode($result,true);
-        var_dump($result);
+        //var_dump($result);
         if($result['response']['items']) $this->checkMessages($result['response']['items']);
     }
 
