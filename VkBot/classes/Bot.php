@@ -30,8 +30,8 @@ class Bot
         $params += $par;
 
         $vd = http_build_query($params);
-        var_dump($vd);
-        var_dump($url);
+        print_r($vd,true);
+        print_r($url,true);
 
         $result = file_get_contents($url, false, stream_context_create(array(
             "ssl"=>array(
