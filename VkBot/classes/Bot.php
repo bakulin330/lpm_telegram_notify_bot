@@ -33,7 +33,7 @@ class Bot
         curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($handle, CURLOPT_CONNECTTIMEOUT, 5);
         curl_setopt($handle, CURLOPT_TIMEOUT, 60);
-        curl_setopt($handle, CURLOPT_POSTFIELDS, json_encode($params));
+        curl_setopt($handle, CURLOPT_POSTFIELDS, $params);
         curl_setopt($handle, CURLOPT_HTTPHEADER, array("Content-Type: application/json"));
         curl_setopt($handle, CURLOPT_SSL_VERIFYHOST, 0);
         curl_setopt($handle, CURLOPT_SSL_VERIFYPEER, 0);
