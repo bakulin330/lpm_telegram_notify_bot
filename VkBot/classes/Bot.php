@@ -24,7 +24,7 @@ class Bot
         $url = $this->url.$req_method;
         $params = array(
             'access_token' => $this->access_token
-//            'v' => $this->v,
+            'v' => $this->v,
         );
 
         $params += $par;
