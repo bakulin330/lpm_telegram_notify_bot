@@ -15,7 +15,7 @@ class Bot
     {
         $this->db = new DatabaseImitation();
         $this->url = 'https://api.vk.com/method/';
-        $this->access_token = "359dcf966f4651ed41f9520550e05bc23e8b8ad598aec2dd1eeaaf482bb18ab868ddb21b553837c15ef41";
+        $this->access_token = "9d3111a2d78e098162a5d3e693c9b639bf8f0cf64a4caceb25d672b829ec9d0e0cbe348992e62ac2650da";
         $this->bot_id = 16309784;
     }
 
@@ -23,24 +23,30 @@ class Bot
     {
         $req_method = $method;
         $url = $this->url.$req_method;
-        $sig_params = array(
-            'access_token' => $this->access_token.$this->secret,
-        );
+//        $sig_params = array(
+//            'access_token' => $this->access_token.$this->secret,
+//        );
+
+        $sig_params = $par;
+        $sig_params['v'] = $this->v;
+        $sig_params['access_token'] = $this->access_token.$this->secret;
 
         $sig_params += $par;
-        $sig = md5("/method/".$req_method."?".http_build_query($sig_params));
-        $params = array(
-            'access_token' => $this->access_token,
-        );
-
-        $params += $par;
-
+        $q = http_build_query($sig_params);
+        $qr = "/method/".$req_method."?$q";
+        $sig = md5($qr);
+        $params = $par;
+        $params['v'] = $this->v;
+        $params['access_token'] = $this->access_token;
         $params['sig'] = $sig;
 
 
 //      secret=b4745a0c47382ff1d0
 //        $sig = md5("/method/messages.getHistory?count=4&user_id=16309784&access_token=9d3111a2d78e098162a5d3e693c9b639bf8f0cf64a4caceb25d672b829ec9d0e0cbe348992e62ac2650dab4745a0c47382ff1d0");
 //        $q = "https://api.vk.com/method/messages.getHistory?count=4&user_id=16309784&access_token=9d3111a2d78e098162a5d3e693c9b639bf8f0cf64a4caceb25d672b829ec9d0e0cbe348992e62ac2650da&sig=$sig";
+
+//        $sig = md5("/method/messages.getDialogs?count=1&unread=1&preview_length=10&v=5.44&access_token=9d3111a2d78e098162a5d3e693c9b639bf8f0cf64a4caceb25d672b829ec9d0e0cbe348992e62ac2650dab4745a0c47382ff1d0");
+//        $q = "https://api.vk.com/method/messages.getDialogs?count=1&unread=1&preview_length=10&v=5.44&access_token=9d3111a2d78e098162a5d3e693c9b639bf8f0cf64a4caceb25d672b829ec9d0e0cbe348992e62ac2650da&sig=$sig";
 
 
 //        echo 'params: '.vd( $params ).'<br/>';
@@ -74,7 +80,6 @@ class Bot
                 'content' => http_build_query($params)
             )
         )));
-//        $result = file_get_contents($q);
 
         return $result;
     }
