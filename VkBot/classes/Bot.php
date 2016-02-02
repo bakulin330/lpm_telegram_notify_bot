@@ -8,7 +8,7 @@ class Bot
     protected $bot_id;
     protected $access_token;
     protected $message;
-    protected $v = "5.44";
+    //protected $v = "5.44";
 
     public function __construct()
     {
@@ -23,13 +23,12 @@ class Bot
         $req_method = $method;
         $url = $this->url.$req_method;
         $params = array(
-            'access_token' => $this->access_token,
-            'v' => $this->v,
+            'access_token' => $this->access_token
         );
 
         $params += $par;
 
-//        echo 'params: '.vd( $params ).'<br/>';
+        echo 'params: '.vd( $params ).'<br/>';
 //        $opt = "count=1&unread=1&preview_length=10&access_token=$this->access_token&v=$this->v";
 
 //        $handle = curl_init($url);
@@ -49,10 +48,10 @@ class Bot
 //        echo 'result: '.vd($result).'<br/>';
 
         $result = file_get_contents($url, false, stream_context_create(array(
-            "ssl"=>array(
-                "verify_peer"=>false,
-                "verify_peer_name"=>false,
-            ),
+//            "ssl"=>array(
+//                "verify_peer"=>false,
+//                "verify_peer_name"=>false,
+//            ),
             'http' => array(
                 'method'  => 'POST',
                 'header'  => 'Content-type: application/x-www-form-urlencoded',
