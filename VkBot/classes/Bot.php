@@ -24,6 +24,8 @@ class Bot
         $url = $this->url.$req_method;
         $params = array(
             'access_token' => $this->access_token,
+            'captcha_sid' => 435737524898,
+            'captcha_key' => 's2zpax8',
 //            'v' => $this->v,
         );
 
