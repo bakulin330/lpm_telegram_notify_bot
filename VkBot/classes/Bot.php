@@ -29,7 +29,7 @@ class Bot
 
         $params += $par;
 
-        $q = $this->url.$req_method."?access_token=$this->access_token&v=$this->v&count=1&unread=1&preview_length=10";
+        $q = $this->url.$req_method."?access_token=$this->access_token&count=1&unread=1&preview_length=10";
 
 //        echo 'params: '.vd( $params ).'<br/>';
 //        echo 'params: '.vd( http_build_query($params) ).'<br/>';
