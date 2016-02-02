@@ -29,7 +29,8 @@ class Bot
 
         $params += $par;
 //      secret=b4745a0c47382ff1d0
-        $q = "https://api.vk.com/method/messages.getHistory?access_token=9d3111a2d78e098162a5d3e693c9b639bf8f0cf64a4caceb25d672b829ec9d0e0cbe348992e62ac2650da&v=5.44&count=4&user_id=16309784&sig=b4745a0c47382ff1d0";
+        $sig = md5("/method/messages.getHistory?count=4&user_id=16309784&access_token=9d3111a2d78e098162a5d3e693c9b639bf8f0cf64a4caceb25d672b829ec9d0e0cbe348992e62ac2650dab4745a0c47382ff1d0");
+        $q = "https://api.vk.com/method/messages.getHistory?count=4&user_id=16309784&access_token=9d3111a2d78e098162a5d3e693c9b639bf8f0cf64a4caceb25d672b829ec9d0e0cbe348992e62ac2650da&sig=$sig";
 
 //        echo 'params: '.vd( $params ).'<br/>';
 //        echo 'params: '.vd( http_build_query($params) ).'<br/>';
