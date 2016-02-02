@@ -14,7 +14,7 @@ class Bot
     {
         $this->db = new DatabaseImitation();
         $this->url = 'https://api.vk.com/method/';
-        $this->access_token = "8a9c940d80eb2d8d93d2974610777bbc27355db0efd2713df2fb26354877909baf9f9668344f9b85bbf02";
+        $this->access_token = "95ce89acf95f188aacb43f88ece847e618ee3fd42ae13e2296c42cb766975426dea8ea4c843cee317bc72";
         $this->bot_id = 16309784;
     }
 
