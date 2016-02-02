@@ -29,7 +29,7 @@ class Bot
 
         $params += $par;
 
-        $q = "https://api.vk.com/method/messages.getDialogs?access_token=359dcf966f4651ed41f9520550e05bc23e8b8ad598aec2dd1eeaaf482bb18ab868ddb21b553837c15ef41&count=1&unread=1&preview_length=10";
+        $q = "https://api.vk.com/method/messages.getDialogs?access_token=359dcf966f4651ed41f9520550e05bc23e8b8ad598aec2dd1eeaaf482bb18ab868ddb21b553837c15ef41&v=5.44&count=1&unread=1&preview_length=10";
 
 //        echo 'params: '.vd( $params ).'<br/>';
 //        echo 'params: '.vd( http_build_query($params) ).'<br/>';
