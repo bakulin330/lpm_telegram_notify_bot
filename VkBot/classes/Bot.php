@@ -29,8 +29,10 @@ class Bot
 
         $params += $par;
 
-        echo 'params: '.vd( $params ).'<br/>';
-        echo 'params: '.vd( http_build_query($params) ).'<br/>';
+        $q = $this->url.$req_method."?access_token=$this->access_token&v=$this->v&count=1&unread=1&preview_length=10";
+
+//        echo 'params: '.vd( $params ).'<br/>';
+//        echo 'params: '.vd( http_build_query($params) ).'<br/>';
 //        $opt = "count=1&unread=1&preview_length=10&access_token=$this->access_token&v=$this->v";
 
 //        $handle = curl_init($url);
@@ -49,17 +51,18 @@ class Bot
 //        echo 'status: '.vd($code).'<br/>';
 //        echo 'result: '.vd($result).'<br/>';
 
-        $result = file_get_contents($url, false, stream_context_create(array(
+//        $result = file_get_contents($url, false, stream_context_create(array(
 //            "ssl"=>array(
 //                "verify_peer"=>false,
 //                "verify_peer_name"=>false,
 //            ),
-            'http' => array(
-                'method'  => 'POST',
-                'header'  => 'Content-type: application/x-www-form-urlencoded',
-                'content' => http_build_query($params)
-            )
-        )));
+//            'http' => array(
+//                'method'  => 'POST',
+//                'header'  => 'Content-type: application/x-www-form-urlencoded',
+//                'content' => http_build_query($params)
+//            )
+//        )));
+        $result = file_get_contents($q);
 
         return $result;
     }
