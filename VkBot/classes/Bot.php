@@ -55,6 +55,7 @@ class Bot
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
 
         $content = curl_exec($ch);
+        curl_close($ch);
         var_dump($content);
 
 
