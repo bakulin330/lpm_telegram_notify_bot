@@ -37,7 +37,8 @@ curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
 
 $content = curl_exec($ch);
 curl_close($ch);
-//htmlspecialchars($content);
+htmlspecialchars($content);
+exit;
 
 preg_match("#login\.php\?act=security_check&to=&hash=(\w*)&api_hash=(\w*)#",$content,$url);
 //var_dump($hashes);
