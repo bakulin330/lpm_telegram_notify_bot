@@ -37,7 +37,7 @@ curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
 
 $content = curl_exec($ch);
 curl_close($ch);
-htmlspecialchars($content);
+//htmlspecialchars($content);
 
 preg_match("#login\.php\?act=security_check&to=&hash=(\w*)&api_hash=(\w*)#",$content,$url);
 //var_dump($hashes);
@@ -56,5 +56,6 @@ curl_setopt($ch, CURLOPT_HTTPHEADER, array(
 curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
 $content = curl_exec($ch);
+var_dump($content);
 curl_close($ch);
-echo htmlspecialchars($content);
+//echo htmlspecialchars($content);
