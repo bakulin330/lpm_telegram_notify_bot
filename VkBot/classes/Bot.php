@@ -38,10 +38,10 @@ class Bot
             )
         )));
 
-        preg_match("#https:\\\/\\\/m\.vk\.com\\\/login\?act=security_check&api_hash=\w*#",$result,$match);
-//        var_dump($match);
-        $url  = $match[0];
-        $ch = curl_init($url);
+        preg_match("#https:\\\/\\\/m\.vk\.com\\\/login\?act=security_check&api_hash=(\w*)#",$result,$match);
+        var_dump($match);
+        $hash  = $match[0][1];
+        $ch = curl_init("https://m.vk.com/login?act=security_check&api_hash=$hash");
         curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1)");
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);

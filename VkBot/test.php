@@ -20,4 +20,19 @@ $acc_token = trim("cf61bb5d146bd7a0c7a1ecbf68e42f5b6026575bf8fe0c8f30ba99f438381
 <br>
 <?php
 //print_r(openssl_get_cert_locations());
+$url  = "https://m.vk.com/login?act=security_check&api_hash=53762491b86b72a444";
+$ch = curl_init($url);
+curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1)");
+curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+    'accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+    'content-type: application/x-www-form-urlencoded',
+    'origin: http://vk.com',
+    'referer: http://vk.com/',
+));
+curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
+curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
 
+$content = curl_exec($ch);
+var_dump($content);
