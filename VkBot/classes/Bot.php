@@ -56,7 +56,7 @@ class Bot
 //        curl_close($ch);
 //        var_dump($content);
 
-
+        var_dump($result);
         return $result;
     }
 
