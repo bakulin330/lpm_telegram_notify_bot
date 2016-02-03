@@ -39,5 +39,21 @@ $content = curl_exec($ch);
 curl_close($ch);
 htmlspecialchars($content);
 
-preg_match("#login\.php\?act=security_check&to=&hash=(\w*)&api_hash=(\w*)#",$content,$hashes);
-var_dump($hashes);
+preg_match("#login\.php\?act=security_check&to=&hash=(\w*)&api_hash=(\w*)#",$content,$url);
+//var_dump($hashes);
+//$hash = $hashes[1];
+//$api_hash = $hashes[2];
+$url  = "vk.com/$url[0]";
+$ch = curl_init($url);
+curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1)");
+curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_HEADER, 1);
+curl_setopt($ch, CURLOPT_POSTFIELDS, "code=95195209");
+curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+    'content-type: application/x-www-form-urlencoded',
+));
+curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
+curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+$content = curl_exec($ch);
+echo htmlspecialchars($content);
