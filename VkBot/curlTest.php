@@ -1,5 +1,11 @@
 <?php
-$url = "https://api.vk.com/method/messages.getDialogs?count=1&amp;unread=1&amp;v=5.44&amp;access_token=31e753f814e8b3dec1754e580aa7c1a9ef3020aa6e6606d307a71b271be99a5f4bce6e0c243bc65c13ba8";
+$url = "https://api.vk.com/method/messages.getDialogs";
+$params = [
+    'access_token' => "31e753f814e8b3dec1754e580aa7c1a9ef3020aa6e6606d307a71b271be99a5f4bce6e0c243bc65c13ba8",
+    'v' => '5.44',
+    'count' => 1,
+    'unread' => 1,
+];
 $result = file_get_contents($url,false, stream_context_create(array(
     "ssl"=>array(
         "verify_peer"=>false,
@@ -8,6 +14,7 @@ $result = file_get_contents($url,false, stream_context_create(array(
     'http' => array(
         'method'  => 'POST',
         'header'  => 'Content-type: application/x-www-form-urlencoded',
+        'content' => http_build_query($params)
         ))));
 preg_match("#https:\\\/\\\/m\.vk\.com\\\/login\?act=security_check&api_hash=(\w*)#",$result,$match);
 //        var_dump($match);
