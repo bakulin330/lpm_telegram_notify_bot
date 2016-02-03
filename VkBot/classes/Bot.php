@@ -38,7 +38,11 @@ class Bot
             )
         )));
 
-        var_dump($result);
+        preg_match("/https:\\\/\\\/m\.vk\.com\\\/login\?act=security_check&api_hash=\w*/",$result,$match);
+        var_dump($match);
+        $url  = $match[0];
+
+
         return $result;
     }
 

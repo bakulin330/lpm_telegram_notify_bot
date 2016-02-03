@@ -19,5 +19,5 @@ $acc_token = trim("cf61bb5d146bd7a0c7a1ecbf68e42f5b6026575bf8fe0c8f30ba99f438381
 <a href="https://api.vk.com/method/users.get?user_ids=37561766&fields=friend_status&v=5.44&access_token=<?=$acc_token?>">check friend status</a>
 <br>
 <?php
-print_r(openssl_get_cert_locations());
+//print_r(openssl_get_cert_locations());
 
