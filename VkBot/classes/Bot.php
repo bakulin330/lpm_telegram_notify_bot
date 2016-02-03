@@ -26,8 +26,6 @@ class Bot
 
         $params += $par;
 
-//
-
         $result = file_get_contents($url, false, stream_context_create(array(
             "ssl"=>array(
                 "verify_peer"=>false,
@@ -40,6 +38,7 @@ class Bot
             )
         )));
 
+        var_dump($result);
         return $result;
     }
 
