@@ -19,10 +19,14 @@ $result = file_get_contents($url,false, stream_context_create(array(
 preg_match("#https:\\\/\\\/m\.vk\.com\\\/login\?act=security_check&api_hash=(\w*)#",$result,$match);
 //        var_dump($match);
 $hash  = $match[0][1];
-$ch = curl_init("https://m.vk.com/login?act=security_check&api_hash=$hash");
+//$ch = curl_init("https://m.vk.com/login?act=security_check&api_hash=$hash");
+$ch = curl_init("https://m.vk.com/login?");
 curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1)");
 curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_VERBOSE, 1);
+curl_setopt($ch, CURLOPT_HEADER, 1);
+curl_setopt($ch, CURLOPT_POSTFIELDS, "act=security_check&api_hash=$hash");
 curl_setopt($ch, CURLOPT_HTTPHEADER, array(
     'accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
     'content-type: application/x-www-form-urlencoded',
