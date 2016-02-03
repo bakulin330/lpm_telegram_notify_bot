@@ -1,8 +1,6 @@
 <?php
 require_once 'config.php';
 require DIR_CLASSES.'Bot.php';
-//require DIR_CLASSES.'Gen.php';
-//require DIR_CLASSES.'DatabaseImitation.php';
 ?>
 
 <form action = "" method="post">
