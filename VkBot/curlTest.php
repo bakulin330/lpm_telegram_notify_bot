@@ -37,14 +37,14 @@ curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
 
 $content = curl_exec($ch);
 curl_close($ch);
-htmlspecialchars($content);
-exit;
+//htmlspecialchars($content);
+//exit;
 
 preg_match("#login\.php\?act=security_check&to=&hash=(\w*)&api_hash=(\w*)#",$content,$url);
 //var_dump($hashes);
 //$hash = $hashes[1];
 //$api_hash = $hashes[2];
-$url  = "vk.com/$url[0]";
+$url  = "https://vk.com/$url[0]";
 $ch = curl_init($url);
 curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1)");
 curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
