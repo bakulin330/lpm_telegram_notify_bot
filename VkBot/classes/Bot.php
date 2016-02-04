@@ -5,7 +5,7 @@ class Bot
     protected $db;
     protected $url = 'https://api.vk.com/method/';
     protected $vk_user_id;
-    protected $access_token = "31e753f814e8b3dec1754e580aa7c1a9ef3020aa6e6606d307a71b271be99a5f4bce6e0c243bc65c13ba8";
+    protected $access_token = "ede799b8c223c783602774d256acb5388e5bf817f47689cb76a71bdf7fbd8f12b52ade533c30d371c8b8f";
     protected $message;
     protected $v = "5.44";
 
