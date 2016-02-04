@@ -24,7 +24,6 @@ class DatabaseImitation
     public function writeConnectedUser($data)
     {
         $res = file_put_contents($this->connected_users, "<?php return ". var_export($data,true) . ";", EXTR_OVERWRITE);
-        var_dump($res);
     }
 
     public function readConnectedUsersFile()
