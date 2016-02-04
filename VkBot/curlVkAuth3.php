@@ -1,18 +1,18 @@
 <?php
 /*
-Новый скрипт авторизации во ВКонтакте на PHP с использованием CURL
+РќРѕРІС‹Р№ СЃРєСЂРёРїС‚ Р°РІС‚РѕСЂРёР·Р°С†РёРё РІРѕ Р’РљРѕРЅС‚Р°РєС‚Рµ РЅР° PHP СЃ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёРµРј CURL
  
-(!) Не предусмотрен ввод каптчи
+(!) РќРµ РїСЂРµРґСѓСЃРјРѕС‚СЂРµРЅ РІРІРѕРґ РєР°РїС‚С‡Рё
  
-Вы можете оптимизировать скрипт, избавив его от постоянного запроса на авторизацию.
-Сам не стал этим заниматься, так как лень ^.^
+Р’С‹ РјРѕР¶РµС‚Рµ РѕРїС‚РёРјРёР·РёСЂРѕРІР°С‚СЊ СЃРєСЂРёРїС‚, РёР·Р±Р°РІРёРІ РµРіРѕ РѕС‚ РїРѕСЃС‚РѕСЏРЅРЅРѕРіРѕ Р·Р°РїСЂРѕСЃР° РЅР° Р°РІС‚РѕСЂРёР·Р°С†РёСЋ.
+РЎР°Рј РЅРµ СЃС‚Р°Р» СЌС‚РёРј Р·Р°РЅРёРјР°С‚СЊСЃСЏ, С‚Р°Рє РєР°Рє Р»РµРЅСЊ ^.^
  
 Author: Ruslan Sadykhov https://vk.com/fsdsdfsfdsfsdfsdfsdfsdfsdfsgsdfs
 */
 
 $login = '79163680325';
 $password = '123456';
-$security_check_code = '95195209'; // если требуется 8 цифр номера телефона (по крайней мере у меня столько запросило)
+$security_check_code = '95195209'; // РµСЃР»Рё С‚СЂРµР±СѓРµС‚СЃСЏ 8 С†РёС„СЂ РЅРѕРјРµСЂР° С‚РµР»РµС„РѕРЅР° (РїРѕ РєСЂР°Р№РЅРµР№ РјРµСЂРµ Сѓ РјРµРЅСЏ СЃС‚РѕР»СЊРєРѕ Р·Р°РїСЂРѕСЃРёР»Рѕ)
 
 $headers = array(
     'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
@@ -20,7 +20,7 @@ $headers = array(
     'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36'
 );
 
-// получаем главную страницу
+// РїРѕР»СѓС‡Р°РµРј РіР»Р°РІРЅСѓСЋ СЃС‚СЂР°РЅРёС†Сѓ
 $get_main_page = post('https://vk.com', array(
     'headers' => array(
         'accept: '.$headers['accept'],
@@ -29,11 +29,11 @@ $get_main_page = post('https://vk.com', array(
     )
 ));
 
-// парсим с главной страницы параметры ip_h и lg_h
+// РїР°СЂСЃРёРј СЃ РіР»Р°РІРЅРѕР№ СЃС‚СЂР°РЅРёС†С‹ РїР°СЂР°РјРµС‚СЂС‹ ip_h Рё lg_h
 preg_match('/name=\"ip_h\" value=\"(.*?)\"/s', $get_main_page['content'], $ip_h);
 preg_match('/name=\"lg_h\" value=\"(.*?)\"/s', $get_main_page['content'], $lg_h);
 
-// посылаем запрос на авторизацию
+// РїРѕСЃС‹Р»Р°РµРј Р·Р°РїСЂРѕСЃ РЅР° Р°РІС‚РѕСЂРёР·Р°С†РёСЋ
 $post_auth = post('https://login.vk.com/?act=login', array(
     'params' => 'act=login&role=al_frame&_origin='.urlencode('http://vk.com').'&ip_h='.$ip_h[1].'&lg_h='.$lg_h[1].'&email='.urlencode($login).'&pass='.urlencode($password),
     'headers' => array(
@@ -44,16 +44,16 @@ $post_auth = post('https://login.vk.com/?act=login', array(
     'cookies' => $get_main_page['cookies']
 ));
 
-// получаем ссылку для редиректа после авторизации
+// РїРѕР»СѓС‡Р°РµРј СЃСЃС‹Р»РєСѓ РґР»СЏ СЂРµРґРёСЂРµРєС‚Р° РїРѕСЃР»Рµ Р°РІС‚РѕСЂРёР·Р°С†РёРё
 preg_match('/Location\: (.*)/s', $post_auth['headers'], $post_auth_location);
 
 if(!preg_match('/\_\_q\_hash=/s', $post_auth_location[1])) {
-    echo 'Не удалось авторизоваться <br /> <br />'.$post_auth['headers'];
+    echo 'РќРµ СѓРґР°Р»РѕСЃСЊ Р°РІС‚РѕСЂРёР·РѕРІР°С‚СЊСЃСЏ <br /> <br />'.$post_auth['headers'];
 
     exit;
 }
 
-// переходим по полученной для редиректа ссылке
+// РїРµСЂРµС…РѕРґРёРј РїРѕ РїРѕР»СѓС‡РµРЅРЅРѕР№ РґР»СЏ СЂРµРґРёСЂРµРєС‚Р° СЃСЃС‹Р»РєРµ
 $get_auth_location = post($post_auth_location[1], array(
     'headers' => array(
         'accept: '.$headers['accept'],
@@ -63,18 +63,18 @@ $get_auth_location = post($post_auth_location[1], array(
     'cookies' => $post_auth['cookies']
 ));
 
-// получаем ссылку на свою страницу
+// РїРѕР»СѓС‡Р°РµРј СЃСЃС‹Р»РєСѓ РЅР° СЃРІРѕСЋ СЃС‚СЂР°РЅРёС†Сѓ
 preg_match('/"uid"\:"([0-9]+)"/s', $get_auth_location['content'], $my_page_id);
 
 $my_page_id = $my_page_id[1];
 
 $get_my_page = getUserPage($my_page_id, $get_auth_location['cookies']);
 
-// если запрошена проверка безопасности
+// РµСЃР»Рё Р·Р°РїСЂРѕС€РµРЅР° РїСЂРѕРІРµСЂРєР° Р±РµР·РѕРїР°СЃРЅРѕСЃС‚Рё
 if(preg_match('/act=security\_check/s', $get_my_page['headers'])) {
     preg_match('/Location\: (.*)/s', $get_my_page['headers'], $security_check_location);
 
-    // переходим на страницу проверки безопасности
+    // РїРµСЂРµС…РѕРґРёРј РЅР° СЃС‚СЂР°РЅРёС†Сѓ РїСЂРѕРІРµСЂРєРё Р±РµР·РѕРїР°СЃРЅРѕСЃС‚Рё
     $get_security_check_page = post('https://vk.com'.$security_check_location[1], array(
         'headers' => array(
             'accept: '.$headers['accept'],
@@ -84,10 +84,10 @@ if(preg_match('/act=security\_check/s', $get_my_page['headers'])) {
         'cookies' => $get_auth_location['cookies']
     ));
 
-    // получаем hash для запроса на проверку мобильного телефона
+    // РїРѕР»СѓС‡Р°РµРј hash РґР»СЏ Р·Р°РїСЂРѕСЃР° РЅР° РїСЂРѕРІРµСЂРєСѓ РјРѕР±РёР»СЊРЅРѕРіРѕ С‚РµР»РµС„РѕРЅР°
     preg_match('/hash: \'(.*?)\'/s', $get_security_check_page['content'], $get_security_check_page_hash);
 
-    // вводим запрошенные цифры мобильного телефона
+    // РІРІРѕРґРёРј Р·Р°РїСЂРѕС€РµРЅРЅС‹Рµ С†РёС„СЂС‹ РјРѕР±РёР»СЊРЅРѕРіРѕ С‚РµР»РµС„РѕРЅР°
     $post_security_check_code = post('https://vk.com/login.php', array(
         'params' => 'act=security_check&code='.$security_check_code.'&al_page=2&hash='.$get_security_check_page_hash[1],
         'headers' => array(
@@ -98,14 +98,14 @@ if(preg_match('/act=security\_check/s', $get_my_page['headers'])) {
         'cookies' => $get_auth_location['cookies']
     ));
 
-    echo 'Запрошена проверка безопасности';
+    echo 'Р—Р°РїСЂРѕС€РµРЅР° РїСЂРѕРІРµСЂРєР° Р±РµР·РѕРїР°СЃРЅРѕСЃС‚Рё';
 
-    // отображаем свою страницу после проверки безопасности
+    // РѕС‚РѕР±СЂР°Р¶Р°РµРј СЃРІРѕСЋ СЃС‚СЂР°РЅРёС†Сѓ РїРѕСЃР»Рµ РїСЂРѕРІРµСЂРєРё Р±РµР·РѕРїР°СЃРЅРѕСЃС‚Рё
     $get_my_page = getUserPage($my_page_id, $get_auth_location['cookies']);
 
     echo iconv('windows-1251', 'utf-8', $get_my_page['content']);
 } else {
-    // также отображаем свою страницу, если нет проверки безопасности
+    // С‚Р°РєР¶Рµ РѕС‚РѕР±СЂР°Р¶Р°РµРј СЃРІРѕСЋ СЃС‚СЂР°РЅРёС†Сѓ, РµСЃР»Рё РЅРµС‚ РїСЂРѕРІРµСЂРєРё Р±РµР·РѕРїР°СЃРЅРѕСЃС‚Рё
     echo iconv('windows-1251', 'utf-8', $get_my_page['content']);
 }
 
