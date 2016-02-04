@@ -39,7 +39,7 @@ class Bot
         )));
 
         $result = json_decode($result , true);
-        if($result['error']['error_code'] == 9 ){
+        if(isset($result['error']) && $result['error']['error_code'] == 9){
             $this->sendMessage($par['message'].'.',$par['user_id']);
         }
 
