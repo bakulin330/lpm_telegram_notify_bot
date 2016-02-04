@@ -38,6 +38,11 @@ class Bot
             )
         )));
 
+        $result = json_decode($result , true);
+        if($result['error']['error_code'] == 9 ){
+            $this->sendMessage($par['message'].'.',$par['user_id']);
+        }
+
         return $result;
     }
 
@@ -60,7 +65,6 @@ class Bot
         ];
 
         $result = $this->sendRequest("messages.getDialogs", $params);
-        $result = json_decode($result, true);
         if(empty($result['response']['items'])) return false;
         $this->checkMessages($result['response']['items']);
     }
