@@ -1,8 +1,8 @@
 <?php
 
-$login = '79519520971';
-$password = '123456';
-$security_check_code = '95195209'; // если требуется 8 цифр номера телефона (по крайней мере у меня столько запросило)
+$login = '';
+$password = '';
+$security_check_code = '';
 
 $headers = array(
     'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
@@ -10,7 +10,7 @@ $headers = array(
     'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36'
 );
 
-// получаем главную страницу
+
 $get_main_page = post('https://vk.com', array(
     'headers' => array(
         'accept: '.$headers['accept'],
@@ -19,11 +19,9 @@ $get_main_page = post('https://vk.com', array(
     )
 ));
 
-// парсим с главной страницы параметры ip_h и lg_h
 preg_match('/name=\"ip_h\" value=\"(.*?)\"/s', $get_main_page['content'], $ip_h);
 preg_match('/name=\"lg_h\" value=\"(.*?)\"/s', $get_main_page['content'], $lg_h);
 
-// посылаем запрос на авторизацию
 $post_auth = post('https://login.vk.com/?act=login', array(
     'params' => 'act=login&role=al_frame&_origin='.urlencode('http://vk.com').'&ip_h='.$ip_h[1].'&lg_h='.$lg_h[1].'&email='.urlencode($login).'&pass='.urlencode($password),
     'headers' => array(
@@ -34,7 +32,6 @@ $post_auth = post('https://login.vk.com/?act=login', array(
     'cookies' => $get_main_page['cookies']
 ));
 
-// получаем ссылку для редиректа после авторизации
 preg_match('/Location\: (.*)/s', $post_auth['headers'], $post_auth_location);
 
 if(!preg_match('/\_\_q\_hash=/s', $post_auth_location[1])) {
@@ -43,7 +40,6 @@ if(!preg_match('/\_\_q\_hash=/s', $post_auth_location[1])) {
     exit;
 }
 
-// переходим по полученной для редиректа ссылке
 $get_auth_location = post($post_auth_location[1], array(
     'headers' => array(
         'accept: '.$headers['accept'],
@@ -53,18 +49,15 @@ $get_auth_location = post($post_auth_location[1], array(
     'cookies' => $post_auth['cookies']
 ));
 
-// получаем ссылку на свою страницу
 preg_match('/"uid"\:"([0-9]+)"/s', $get_auth_location['content'], $my_page_id);
 
 $my_page_id = $my_page_id[1];
 
 $get_my_page = getUserPage($my_page_id, $get_auth_location['cookies']);
 
-// если запрошена проверка безопасности
 if(preg_match('/act=security\_check/s', $get_my_page['headers'])) {
     preg_match('/Location\: (.*)/s', $get_my_page['headers'], $security_check_location);
 
-    // переходим на страницу проверки безопасности
     $get_security_check_page = post('https://vk.com'.$security_check_location[1], array(
         'headers' => array(
             'accept: '.$headers['accept'],
@@ -74,10 +67,8 @@ if(preg_match('/act=security\_check/s', $get_my_page['headers'])) {
         'cookies' => $get_auth_location['cookies']
     ));
 
-    // получаем hash для запроса на проверку мобильного телефона
     preg_match('/hash: \'(.*?)\'/s', $get_security_check_page['content'], $get_security_check_page_hash);
 
-    // вводим запрошенные цифры мобильного телефона
     $post_security_check_code = post('https://vk.com/login.php', array(
         'params' => 'act=security_check&code='.$security_check_code.'&al_page=2&hash='.$get_security_check_page_hash[1],
         'headers' => array(
@@ -90,12 +81,10 @@ if(preg_match('/act=security\_check/s', $get_my_page['headers'])) {
 
     echo 'Запрошена проверка безопасности';
 
-    // отображаем свою страницу после проверки безопасности
     $get_my_page = getUserPage($my_page_id, $get_auth_location['cookies']);
 
     echo iconv('windows-1251', 'utf-8', $get_my_page['content']);
 } else {
-    // также отображаем свою страницу, если нет проверки безопасности
     echo iconv('windows-1251', 'utf-8', $get_my_page['content']);
 }
 
