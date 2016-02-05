@@ -107,10 +107,6 @@ class Bot
     {
         $user_id = $this->isExistUser($code);
         if ($user_id) {
-//            if($this->isFriends($vk_user_id)) {
-//                $this->sendMessage("Пожалуйста, отмените заявку в друзья", $vk_user_id);
-//                return false;
-//            }
             $data[$user_id] = $vk_user_id;
             $this->db->writeConnectedUser($data);
             $this->sendMessage("Вы успешно подключили функцию уведомления", $vk_user_id);
