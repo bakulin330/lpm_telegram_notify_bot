@@ -78,7 +78,7 @@ class Bot
             elseif($this->alreadyConnected($items[$i]['message']['user_id'])){
                 $this->sendMessage("Вам уже подключены уведомления. Для отключения введите /stop", $items[$i]['message']['user_id']);
             }
-            elseif (preg_match("/^\d{$this->settings['code_length']}$/",$items[$i]['message']['body'])) {
+            elseif (preg_match("/^\d{".$this->settings['code_length']."}$/",$items[$i]['message']['body'])) {
                 $this->connectUserByCode($items[$i]['message']['body'],$items[$i]['message']['user_id']);
             }
             else {
