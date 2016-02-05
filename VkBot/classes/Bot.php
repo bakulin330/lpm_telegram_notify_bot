@@ -3,25 +3,22 @@ require 'DatabaseImitation.php';
 class Bot
 {
     protected $db;
-    protected $url = 'https://api.vk.com/method/';
-    protected $vk_user_id;
-    protected $access_token = "ede799b8c223c783602774d256acb5388e5bf817f47689cb76a71bdf7fbd8f12b52ade533c30d371c8b8f";
-    protected $message;
-    protected $v = "5.44";
+    protected $settings;
 
-    public function __construct()
+    public function __construct($settings)
     {
+        $this->settings = $settings;
         $this->db = new DatabaseImitation();
     }
 
     public function sendRequest($method, $par)
     {
         $req_method = $method;
-        $url = $this->url.$req_method;
+        $url = $this->settings['url'].$req_method;
 
         $params = [
-            'access_token' => $this->access_token,
-            'v' => $this->v,
+            'access_token' => $this->settings['access_token'],
+            'v' => $this->settings['v'],
         ];
 
         $params += $par;
@@ -59,7 +56,7 @@ class Bot
     public function getDialogsWithNewMessages()
     {
         $params = [
-            'count' => '1',
+            'count' => '3',
             'unread' => '1',
             'preview_length' => '10',
         ];
@@ -75,18 +72,19 @@ class Bot
         for($i = 0 ; $i < count($items); $i++) {
             $this->markMessageAsRead($items[$i]['message']['id']);
 
-            if (preg_match("/^\/stop$/", $items[$i]['message']['body']) && $this->alreadyConnected($items[$i]['message']['user_id'])){
+            if ("/stop" == $items[$i]['message']['body'] && $this->alreadyConnected($items[$i]['message']['user_id'])){
                 $this->stopNotify($items[$i]['message']['user_id']);
             }
             elseif($this->alreadyConnected($items[$i]['message']['user_id'])){
-                $this->sendMessage("Для отключения функции уведомления введите команду : /stop ", $items[$i]['message']['user_id']);
+                $this->sendMessage("Вам уже подключены уведомления. Для отключения введите /stop", $items[$i]['message']['user_id']);
             }
-            elseif (preg_match("/^\d{4}$/", $items[$i]['message']['body'])) {
+            elseif (preg_match("/^\d{$this->settings['code_length']}$/",$items[$i]['message']['body'])) {
                 $this->connectUserByCode($items[$i]['message']['body'],$items[$i]['message']['user_id']);
             }
             else {
-                $this->sendMessage("Код должен состоять из четырех цифр", $items[$i]['message']['user_id']);
+                $this->sendMessage("Код должен состоять из ".$this->settings['code_length']." цифр", $items[$i]['message']['user_id']);
             }
+            usleep(350000);
         }
     }
 
@@ -109,11 +107,10 @@ class Bot
     {
         $user_id = $this->isExistUser($code);
         if ($user_id) {
-            $status = $this->checkFriendStatus($vk_user_id);
-            if($status !== 0){
-                $this->sendMessage("В целях сохранения Вашей конфиденциальности, пожалуйста, отмените заявку ко мне в друзья", $vk_user_id);
-                return false;
-            }
+//            if($this->isFriends($vk_user_id)) {
+//                $this->sendMessage("Пожалуйста, отмените заявку в друзья", $vk_user_id);
+//                return false;
+//            }
             $data[$user_id] = $vk_user_id;
             $this->db->writeConnectedUser($data);
             $this->sendMessage("Вы успешно подключили функцию уведомления", $vk_user_id);
@@ -124,7 +121,7 @@ class Bot
         }
     }
 
-    public function checkFriendStatus($vk_user_id)
+    public function isFriends($vk_user_id)
     {
         $params = [
             'user_ids' => $vk_user_id,
@@ -132,9 +129,9 @@ class Bot
         ];
 
         $result = $this->sendRequest('users.get',$params);
-        $result = json_decode($result,true);
 
-        return $result['response'][0]['friend_status'];
+        if ($result['response'][0]['friend_status'] !== 0 ) return true;
+        else return false;
     }
 
     public function alreadyConnected($vk_user_id)

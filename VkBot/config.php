@@ -8,14 +8,16 @@ if (!defined('CONFIG_LOADED')) {
     defined('DIR_CLASSES') or define('DIR_CLASSES', DIR_ROOT . 'classes' . DS);
     defined('DIR_VENDOR') or define('DIR_VENDOR', DIR_ROOT . 'vendor' . DS);
     defined('DIR_IMG') or define('DIR_IMG', DIR_ROOT . 'imgFolder' . DS);
-
 //    define('BASE_URL', 'http://localhost/VKapi/');
     define('BASE_URL', 'http://wp.12qw.ru/telegram/VkBot');
-    define('API_KEY', '156771533:AAFtGPT_o3MFuPRBnuYwOZGfNHWt_FivTy4');
-    define('WEBHOOK_URL', 'https://wp.12qw.ru/telegram/index.php');
 
+    $settings = [
+        'url' => 'https://api.vk.com/method/',
+        'access_token' => 'ede799b8c223c783602774d256acb5388e5bf817f47689cb76a71bdf7fbd8f12b52ade533c30d371c8b8f',
+        'v' => '5.44',
+        'code_length' => 4,
+    ];
     $user_id = 89370;
-    $bot_id = 16309784;
 
     define('CONFIG_LOADED', true);
 }

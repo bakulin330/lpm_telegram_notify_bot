@@ -6,7 +6,7 @@ $acc_token = trim("cf61bb5d146bd7a0c7a1ecbf68e42f5b6026575bf8fe0c8f30ba99f438381
 
 <a href="https://oauth.vk.com/authorize?client_id=<?=$client_id;?>&display=page&redirect_uri=https://oauth.vk.com/blank.html&scope=<?=$scope;?>&response_type=token&v=5.37">Push the button</a>
 <br>
-<a href="https://api.vk.com/method/messages.send?user_id=16309784&message=dretgwe&v=5.44&access_token=bc78db5d2ef1a928ddfc4a06b2a6dde447852c236464c9710e62419ed55dd07b4e4778f19d019bf334039">Send message</a>
+<a href="https://api.vk.com/method/messages.send?user_id=281809874&message=dretgwe&v=5.44&access_token=ede799b8c223c783602774d256acb5388e5bf817f47689cb76a71bdf7fbd8f12b52ade533c30d371c8b8f">Send message</a>
 <br>
 <a href="https://api.vk.com/method/friends.areFriends?user_ids=279739846&need_sign=0&v=5.44&access_token=110c02c7190ca3a3f0aa933525273a456a74b723bec1800cb17acb85d28ffc04e2a5d5b6d19fa526fdb01">check friend</a>
 <br>
